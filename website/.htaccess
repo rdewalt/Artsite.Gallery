@@ -1,0 +1,11 @@
+#AuthUserFile /var/www/.htpasswd
+#AuthName "Admin Panel:"
+#AuthType Basic
+#Require valid-user
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} \/([0-9a-zA-Z]+)$ [NC]
+RewriteRule ^(.*) i.php?sid=%1 [L]
+
+RewriteCond %{REQUEST_URI} \/U:([0-9a-zA-Z]+)$ [NC]
+RewriteRule ^(.*) u.php?id=%1 [L]

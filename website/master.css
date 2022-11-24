@@ -1,0 +1,288 @@
+* {
+	margin: 0;
+	font-family: Verdana, Helvetica, Arial, Comic-Sans, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+a:link		{ background-color: #ffffff; color: #0000ff; text-decoration: none; }
+a:visited	{ background-color: #ffffff; color: #0000ff; text-decoration: none; }
+a:hover		{ background-color: #ffffff; color: #ff0000; background-color: #efefef; text-decoration: none; }
+a:active	{ background-color: #ffffff; color: #d2d2d2; text-decoration: none; }
+
+.headerlogo {
+	background-color: #4040af;
+	width: 141px; height: 36px; /* 16:9 ratio.... */
+	font-size: 25px;
+	color: #ffffff;
+	top: 0; left: 0;
+	float: left;
+}
+.success {
+	font-size: 200%;
+	color: orange;
+}
+
+input[type=text]:focus { background-color: #eeeeff; }
+
+span.fileFolder {
+	font-size : 100px;
+}
+span.setupIcon {
+	font-size : 30px;
+}
+div.outercontainer { width: 100%; }
+div.frontpageimages {
+	width: 870px;
+	margin: 0 auto;
+	min-width: 870px;
+	text-align: center;
+}
+div.frontpageimages:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+div.frontpageimageGrid {
+	float: left;
+	min-width: 150px;
+	min-height: 150px;
+	padding: 5px;
+	margin: 5px;
+	align-content: center;
+}
+div.frontpageimageTimeline {
+	vertical-align: middle;
+	text-align: left;
+	min-width: 400px;
+	min-height: 150px;
+	padding: 5px;
+	margin: 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgray;
+}
+img.frontpageimageTimeline{
+	vertical-align: middle;
+	display: block;
+	float: left;
+  }
+img.frontpageimageGrid{
+	vertical-align: middle;
+	display: block;
+	margin: 0 auto;
+  }
+div.frontpageimage:hover{
+	background-color: #ccccff;
+}
+.MainToolbar {
+	height: 50px;
+	padding-right: 	0px;
+	border-style: 	none;
+	border-bottom:	solid #000000;
+	border-width: 	1px;
+	text-align: 	right;
+
+}
+div.OTPLoginBox {
+ 	background-color:#eeeeff;
+ 	width:300px;
+ 	border-style:solid;
+ 	border-color:#ffffff;
+ 	display:none
+}
+
+.headercontainer {
+	height: 50px;
+	width:  100%;
+}
+
+
+.loginbuttons {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 200px;
+        border-width: 1px;
+	border-style: solid;
+	text-align: center;
+}
+
+.newuserpage {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 500px;
+        border-width: 1px;
+        min-width: 500px;
+	border-style: solid;
+	text-align: center;
+}
+
+.centerbox {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 40%;
+}
+
+div.menubox {
+	background-color: #ffffff;
+	border-style: solid 1px;
+	float: right;
+	padding-right: 5px;
+	padding-top: 5px;
+	align-content: right;
+}
+div.UserHeaderBanner {
+	background-color:#000062;
+	width:1280px;
+	margin: auto;
+	background-repeat: none;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	height: 250px;
+	min-height:250px;
+	overflow: auto;
+}
+div.userPageinfobox {
+	border-style: 1px solid;
+	background-color: inherit;
+	float: left;
+}
+div.userPageinfoboxAvatar {
+	clear: left;
+	border-style: 1px solid;
+	float: left;
+}
+
+div.userPageContentContainer{
+	min-width: 440px	;
+	margin-right:600px;
+}
+
+div.userPageLeft
+{	float: left;
+	width: 95%;
+	min-width: 400px;
+}
+
+div.userPageRight
+{	float: right;
+	width: 600px;
+	margin-right: -600px;
+}
+div.clearbox { clear: both; }
+
+div.userPageArticle {
+	text-align: center;
+	font-size: 80%;
+	overflow: auto;
+	min-height: 200px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	margin: 5px;
+	padding: 5px;
+}
+div.userPageWall {
+	font-size: 80%;
+	overflow: auto;
+	min-height: 200px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+div.imagemain {
+	width: 95%;
+	margin: auto;
+}
+div.imageitself {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 80%;
+}
+div.imageboxTitle {
+	border: 1px solid #000010;
+	float: left;
+	background-color: #ffffff;
+	width:100%;
+	clear: both;
+}
+div.imagedetails
+{
+	float: right;
+	border-style 1px solid;
+	border-color: #000000;
+	background-color: #eeeeff;
+}
+
+div.postimage {
+	width: 100%;
+	min-width:1050px;
+	background-color: #ffffff;
+	border: 1px solid #000010;
+	clear: both;
+	overflow: auto;
+}
+div.commentmaster{
+	width: 100%;
+	min-width:1050px;
+	background-color: #ffffff;
+	border: 1px solid #000010;
+	clear: both;
+	overflow: auto;
+}
+div.commentbox{
+	width: 50%;
+	min-width: 850px;
+	align-content: center;
+	background-color: #ffffff;
+	border: 1px solid #000010;
+	clear: both;
+	overflow: auto;
+}
+
+textarea {
+	background-color: #ffffff;
+}
+
+div.imagepageArtistAvatarBox {
+	width: auto;
+	min-width: 100px;
+	height: auto;
+	border: 1px solid #000000;
+	float: right;
+	padding: 2px;
+	margin: 2px;
+}
+div.FolderList {
+	margin: 2px;
+	padding: 2px;
+	width: 120px;
+	height: 120px;
+	float: left;
+	border-style: solid 1px;
+	border-color: #000000;
+	background-color: #ffffff;
+}
+
+div.FolderListTitle {
+	width: 120px;
+	height: 120px;
+	margin-top: -80px;
+	z-index: 2;
+	color: #FFFFFF;
+	text-shadow: 2px 2px 10px #000000;
+}
+
+
+div.registerBox {
+	padding: 20px;
+	margin: 20px;
+}
