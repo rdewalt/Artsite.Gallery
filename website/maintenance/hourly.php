@@ -1,7 +1,7 @@
 <?php
 function getDBH() 
 {
-	try {  $dbh = new PDO('mysql:host=localhost;dbname=yart', 'root', 'DevDatabasePassword');
+	try {  $dbh = new PDO('mysql:host=localhost;dbname=<NO>', 'OUTOFDATE', 'NO BAD RYAN');
 	    } catch (PDOException $e) {
 	        print "Error!: " . $e->getMessage() . "<br/>"; die();
 		}
