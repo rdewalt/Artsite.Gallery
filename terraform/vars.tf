@@ -57,8 +57,13 @@ variable "webserver_server_count" {
 }
 
 # EC2 Webserver machine size
+variable "database_ec2_size" {
+  default = "t4g.medium"
+}
+
+# EC2 Webserver machine size
 variable "webserver_ec2_size" {
-  default = "t2.micro" #Free tier, use the micro
+  default = "t4g.small"
 }
 
 variable "my_home_cidr" {
