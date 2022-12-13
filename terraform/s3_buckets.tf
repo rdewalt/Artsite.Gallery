@@ -3,8 +3,9 @@ resource "aws_s3_bucket" "images" {
 }
 
 resource "aws_s3_bucket_policy" "public_read_access_images" {
-  bucket = "yna-images"
-  policy = <<EOF
+  depends_on = [aws_s3_bucket.images]
+  bucket     = "yna-images"
+  policy     = <<EOF
 { 
   "Statement": [
     {
@@ -25,8 +26,9 @@ resource "aws_s3_bucket" "image_thumbnails" {
 }
 
 resource "aws_s3_bucket_policy" "public_read_access_thumbs" {
-  bucket = "yna-images-thumbnail"
-  policy = <<EOF
+  depends_on = [aws_s3_bucket.image_thumbnails]
+  bucket     = "yna-images-thumbnail"
+  policy     = <<EOF
 { 
   "Statement": [
     {
