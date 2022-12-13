@@ -38,7 +38,7 @@ variable "connect_type" {
 }
 
 variable "region_az_count" {
-  default = 1
+  default = 2
 }
 
 #Sets up the datasource for use in other locations. 
@@ -51,13 +51,13 @@ variable "termination_protection" {
   default = "true"
 }
 
-# EC2 Machine counts for this deploymnt;
-variable "web_server_count" {
+# EC2 Webserver counts for this deploymnt;
+variable "webserver_server_count" {
   default = 1
 }
 
-# EC2 Default machine size
-variable "web_ec2_size" {
+# EC2 Webserver machine size
+variable "webserver_ec2_size" {
   default = "t2.micro" #Free tier, use the micro
 }
 

@@ -2,3 +2,6 @@
 terraform.tfstate
 terraform.tfstate.backup
 env_setup.sh
+*.pem
+yna-int
+yna-int.pub

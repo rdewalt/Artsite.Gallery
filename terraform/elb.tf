@@ -32,7 +32,7 @@ resource "aws_elb" "main-elb" {
 
   security_groups = ["${aws_security_group.elb.id}"]
 
-  instances                   = flatten(["${aws_instance.applet.*.id}"])
+  instances                   = flatten(["${aws_instance.webserver.*.id}"])
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
