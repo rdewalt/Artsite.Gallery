@@ -24,9 +24,11 @@ variable "keyname" {
   default = "rwd-yna" #default key to use.
 }
 
+
+# default     = "ami-094125af156557ca2"  #x86-64
 variable "default_ami" {
   description = "Default AMI to use when one isn't specified.  This is the Amazon Linux 2 64 bit "
-  default     = "ami-094125af156557ca2"
+  default     = "ami-0f96a89e4a6cf08cc" #ARM
 }
 
 variable "connect_user" {

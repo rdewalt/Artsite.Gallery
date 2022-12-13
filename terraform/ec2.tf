@@ -74,7 +74,7 @@ resource "aws_instance" "webserver" {
   }
 }
 
-resource "aws_instance" "webserver" {
+resource "aws_instance" "database" {
   instance_type           = var.database_ec2_size
   count                   = 1
   ami                     = var.default_ami

@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "images" {
-  bucket = "YNA_IMAGES"
+  bucket = "yna-images"
 }
 
 resource "aws_s3_bucket_policy" "public_read_access_images" {
-  bucket = "aws_s3_bucket.image.id"
+  bucket = "yna-images"
   policy = <<EOF
 { 
   "Statement": [
@@ -13,7 +13,7 @@ resource "aws_s3_bucket_policy" "public_read_access_images" {
       "Principal": "*",
       "Action": [ "s3:GetObject"],
       "Resource": [
-      "arn:aws:s3:::YNA_IMAGES/*"]
+      "arn:aws:s3:::yna-images/*"]
     }
   ]
 }
@@ -21,11 +21,11 @@ EOF
 }
 
 resource "aws_s3_bucket" "image_thumbnails" {
-  bucket = "YNA_IMAGES_THUMBNAIL"
+  bucket = "yna-images-thumbnail"
 }
 
 resource "aws_s3_bucket_policy" "public_read_access_thumbs" {
-  bucket = "aws_s3_bucket.image_thumbnails.id"
+  bucket = "yna-images-thumbnail"
   policy = <<EOF
 { 
   "Statement": [
@@ -35,7 +35,7 @@ resource "aws_s3_bucket_policy" "public_read_access_thumbs" {
       "Principal": "*",
       "Action": [ "s3:GetObject"],
       "Resource": [
-      "arn:aws:s3:::YNA_IMAGES_THUMBNAIL/*"]
+      "arn:aws:s3:::yna-images-thumbnail/*"]
     }
   ]
 }

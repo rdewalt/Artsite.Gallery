@@ -9,7 +9,6 @@ resource "aws_iam_policy" "ec2_policy" {
         {
           "Sid" : "PolicyForS3",
           "Effect" : "Allow",
-          "Principal" : { "AWS" : "936877644948" },
           "Action" : "s3:*",
           "Resource" : ["arn:aws:s3:::YNA_IMAGES/*", "arn:aws:s3:::YNA_IMAGES_THUMBS/*"],
         }
