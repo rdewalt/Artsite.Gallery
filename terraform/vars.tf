@@ -38,8 +38,7 @@ variable "connect_type" {
 }
 
 variable "region_az_count" {
-  description = "Number of AZs for our subnet, we want 2 in this case"
-  default     = 2
+  default = 1
 }
 
 #Sets up the datasource for use in other locations. 
@@ -54,7 +53,7 @@ variable "termination_protection" {
 
 # EC2 Machine counts for this deploymnt;
 variable "web_server_count" {
-  default = 2
+  default = 1
 }
 
 # EC2 Default machine size
@@ -62,3 +61,6 @@ variable "web_ec2_size" {
   default = "t2.micro" #Free tier, use the micro
 }
 
+variable "my_home_cidr" {
+  default = ["67.182.47.219/32"]
+}
