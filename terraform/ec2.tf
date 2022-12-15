@@ -126,8 +126,8 @@ resource "aws_instance" "database" {
   # Remove the -q and --quiet if you need to debug these.  They were very noisy, so once I was done 'developing' I made them quiet.
   provisioner "remote-exec" {
     inline = [
-      "sudo hostnamectl set-hostname webserver-${count.index}",
-      "echo '127.0.0.1 webserver-${count.index}' | sudo tee -a /etc/hosts",
+      "sudo hostnamectl set-hostname database-${count.index}",
+      "echo '127.0.0.1 database-${count.index}' | sudo tee -a /etc/hosts",
       "sudo yum -q install git -y",
       "mkdir -p ~/.ssh/",
       "mv id_rsa ~/.ssh/",
