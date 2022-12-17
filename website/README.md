@@ -1,3 +1,7 @@
+-----
+THE BELOW IS OUT OF DATE I HAVE NOT EDITED IT YET THIS DIRECTORY IS FOR HISTORICAL PURPOSES RIGHT NOW.
+-----
+
 Art community site, trying to be As Secure As Reasonable without Too Much Difficulty To Use.
 Two Factor Authentication is available.  Not /REQUIRED/ to use.
 -----
