@@ -44,3 +44,24 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   name = "ec2_profile"
   role = aws_iam_role.ec2_role.name
 }
+
+
+## Lambda Roles
+
+data "aws_iam_policy_document" "lambda_assume_role_policy" {
+  statement {
+    sid    = ""
+    effect = "Allow"
+    principals {
+      identifiers = ["lambda.amazonaws.com"]
+      type        = "Service"
+    }
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+
+resource "aws_iam_role" "thumbnail_lambda_role" {
+  name               = "thumbnail_lambda_role"
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
+}

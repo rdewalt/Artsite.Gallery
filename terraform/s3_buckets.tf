@@ -22,12 +22,12 @@ EOF
 }
 
 resource "aws_s3_bucket" "image_thumbnails" {
-  bucket = "yna-images-thumbnail"
+  bucket = "yna-images-resized"
 }
 
 resource "aws_s3_bucket_policy" "public_read_access_thumbs" {
   depends_on = [aws_s3_bucket.image_thumbnails]
-  bucket     = "yna-images-thumbnail"
+  bucket     = "yna-images-resized"
   policy     = <<EOF
 { 
   "Statement": [
@@ -37,7 +37,7 @@ resource "aws_s3_bucket_policy" "public_read_access_thumbs" {
       "Principal": "*",
       "Action": [ "s3:GetObject"],
       "Resource": [
-      "arn:aws:s3:::yna-images-thumbnail/*"]
+      "arn:aws:s3:::yna-images-resized/*"]
     }
   ]
 }

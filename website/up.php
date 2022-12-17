@@ -83,8 +83,6 @@ if ($ThumbnailYes) { // Has Thumbnail
 			   }
 	}
 
-
-
 if ( $Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg" or $ThumbnailYes ) {
 
 if ($width>450 or $height>150)
