@@ -35,7 +35,7 @@ resource "aws_instance" "webserver" {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 
@@ -47,7 +47,7 @@ resource "aws_instance" "webserver" {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 
@@ -56,7 +56,8 @@ resource "aws_instance" "webserver" {
     inline = [
       "sudo hostnamectl set-hostname webserver-${count.index}",
       "echo '127.0.0.1 webserver-${count.index}' | sudo tee -a /etc/hosts",
-      "sudo yum -q install git -y",
+      "sudo apt-get update && apt-get upgrade -y",
+      "sudo apt-get install git -y",
       "mkdir -p ~/.ssh/",
       "mv id_rsa ~/.ssh/",
       "mv id_rsa.pub ~/.ssh/",
@@ -69,7 +70,7 @@ resource "aws_instance" "webserver" {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 }
@@ -99,7 +100,7 @@ resource "aws_instance" "database" {
   }
 
   #upload demo ssh keys to grab webserver
-  provisioner "file" { # INTENTIONAL commit of SSH Keys to the repo.
+  provisioner "file" {
     source      = "yna-int"
     destination = "/home/ec2-user/id_rsa"
     on_failure  = fail
@@ -107,11 +108,11 @@ resource "aws_instance" "database" {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 
-  provisioner "file" { # INTENTIONAL commit of SSH Keys to the repo.
+  provisioner "file" {
     source      = "yna-int.pub"
     destination = "/home/ec2-user/id_rsa.pub"
     on_failure  = fail
@@ -119,7 +120,7 @@ resource "aws_instance" "database" {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 
@@ -128,7 +129,8 @@ resource "aws_instance" "database" {
     inline = [
       "sudo hostnamectl set-hostname database-${count.index}",
       "echo '127.0.0.1 database-${count.index}' | sudo tee -a /etc/hosts",
-      "sudo yum -q install git -y",
+      "sudo apt-get update && apt-get upgrade -y",
+      "sudo apt-get install git -y",
       "mkdir -p ~/.ssh/",
       "mv id_rsa ~/.ssh/",
       "mv id_rsa.pub ~/.ssh/",
@@ -136,12 +138,15 @@ resource "aws_instance" "database" {
       "chmod 0600 ~/.ssh/id_rsa",
       "ssh-keyscan github.com >> ~/.ssh/known_hosts",
       "git clone --quiet git@github.com:rdewalt/Artsite.Gallery.git",
+      "cd Artsite.Gallery",
+      #TODO: Remove once initial development is done.
+      "git checkout dev",
     ]
     connection {
       type        = var.connect_type
       user        = var.connect_user
       host        = self.public_ip
-      private_key = file("rwd-yna.pem")
+      private_key = file("./rwd-yna.pem")
     }
   }
 }

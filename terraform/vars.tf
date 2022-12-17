@@ -25,14 +25,13 @@ variable "keyname" {
 }
 
 
-# default     = "ami-094125af156557ca2"  #x86-64
 variable "default_ami" {
-  description = "Default AMI to use when one isn't specified.  This is the Amazon Linux 2 64 bit "
-  default     = "ami-0f96a89e4a6cf08cc" #ARM
+  description = "Default AMI to use when one isn't specified.  Canonical, Ubuntu, 22.04 LTS, arm64 jammy image build on 2022-12-01"
+  default     = "ami-06e2dea2cdda3acda" #ARM
 }
 
 variable "connect_user" {
-  default = "ec2-user" #default for Amazon Linux image above
+  default = "ubuntu"
 }
 
 variable "connect_type" {
