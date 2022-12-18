@@ -51,3 +51,15 @@ resource "aws_instance" "database" {
   }
 
 }
+
+resource "aws_route53_zone" "primary" {
+  name = "solfire.com"
+}
+
+resource "aws_route53_record" "database" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "db.internal.solfire.com"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.database.0.private_ip]
+}

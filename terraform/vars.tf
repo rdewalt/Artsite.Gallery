@@ -59,7 +59,7 @@ variable "termination_protection" {
 
 # EC2 Webserver counts for this deploymnt;
 variable "webserver_server_count" {
-  default = 0
+  default = 1
 }
 
 # EC2 Webserver machine size
@@ -79,4 +79,5 @@ variable "my_home_cidr" {
 variable "dbpass" {
   description = "The password for the DB master user"
   type        = string
+  default = "86753091024"
 }
