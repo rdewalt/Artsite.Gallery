@@ -1,4 +1,5 @@
 .terraform
+.terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
 env_setup.sh
@@ -6,5 +7,6 @@ env_setup.sh
 yna-int
 yna-int.pub
 terraform/lambdas/PIL/
+terraform/.terraform.lock.hcl
 terraform/lambdas/PIL
 *.zip

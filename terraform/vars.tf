@@ -11,6 +11,11 @@ terraform {
     bucket = "rwd-yna-terraform-bucket"
     key    = "backend/terraform.tfstate"
   }
+  required_providers {
+    ssh = {
+      source = "loafoe/ssh"
+    }
+  }
 }
 
 provider "aws" {
@@ -54,7 +59,7 @@ variable "termination_protection" {
 
 # EC2 Webserver counts for this deploymnt;
 variable "webserver_server_count" {
-  default = 1
+  default = 0
 }
 
 # EC2 Webserver machine size
@@ -69,4 +74,9 @@ variable "webserver_ec2_size" {
 
 variable "my_home_cidr" {
   default = ["67.182.47.219/32"]
+}
+
+variable "dbpass" {
+  description = "The password for the DB master user"
+  type        = string
 }
