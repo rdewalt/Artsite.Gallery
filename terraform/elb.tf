@@ -3,7 +3,6 @@
 # Create a new load balancer
 resource "aws_elb" "main-elb" {
   name     = "main-elb"
-  count    = 1
   internal = "false"
 
   subnets = flatten(["${aws_subnet.public.*.id}"])
@@ -16,7 +15,7 @@ resource "aws_elb" "main-elb" {
   }
 
   listener {
-    instance_port     = 443
+    instance_port     = 80
     instance_protocol = "tcp"
     lb_port           = 443
     lb_protocol       = "tcp"
@@ -40,5 +39,17 @@ resource "aws_elb" "main-elb" {
 
   tags = {
     Name = "main-elb"
+  }
+}
+
+resource "aws_route53_record" "yna-elb" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "yna.solfire.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_elb.main-elb.dns_name
+    zone_id                = aws_elb.main-elb.zone_id
+    evaluate_target_health = true
   }
 }

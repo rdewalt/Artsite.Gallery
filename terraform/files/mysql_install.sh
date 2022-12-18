@@ -25,11 +25,10 @@ else
     export DEBIAN_FRONTEND="noninteractive" 
     sudo apt-get install mysql-server -y
 
-    mysql -u root -e "create user 'yna'@'*' identified by '$dbpass';"
+    mysql -u root -e "create user 'yna'@'%' identified by '86753091024';"
     mysql -u root -e "create database yna;"
-    mysql -u root -e "grant all on yna.* to 'yna'@'*';"
+    mysql -u root -e "grant all on yna.* to 'yna'@'%';"
     mysql -u root yna < Artsite.Gallery/sql/yart.sql 
 
     touch /home/ubuntu/.mysql_install_complete
 fi
-

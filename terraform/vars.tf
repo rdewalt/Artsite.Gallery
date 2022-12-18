@@ -79,5 +79,5 @@ variable "my_home_cidr" {
 variable "dbpass" {
   description = "The password for the DB master user"
   type        = string
-  default = "86753091024"
+  default     = "86753091024"
 }
