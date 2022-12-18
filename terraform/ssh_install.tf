@@ -5,6 +5,11 @@ resource "ssh_resource" "db_init" {
   private_key = file("./rwd-yna.pem")
 
   file {
+    source      = "mysql_install.sh"
+    destination = "mysql_install.sh"
+    permissions = "0755"
+  }  
+  file {
     source      = "yna-int"
     destination = ".ssh/id_rsa"
     permissions = "0600"
@@ -18,20 +23,10 @@ resource "ssh_resource" "db_init" {
   commands = [
     "sudo hostnamectl set-hostname database-0",
     "echo '127.0.0.1 database-0' | sudo tee -a /etc/hosts",
-    "sudo apt-get update",
-    "sudo apt-get upgrade -y",
     "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
-    "git clone --quiet git@github.com:rdewalt/Artsite.Gallery.git",
-    "cd Artsite.Gallery",
-    "git checkout dev", #TODO:  Remove checkout branch.
-    "sudo mysql",
-    "create user 'yna'@'localhost' identified by '${var.dbpass}';",
-    "create database yna",
-    "grant all on mysql.* to 'yna'@'localhost'",
-    "grant all on yna.* to 'yna'@'localhost'",
-    "exit",
-    "mysql -u yna -p${var.dbpass} yna < yart.sql"
+    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git",
+    "sudo export dbpass=${var.dbpass} && sudo ./mysql_install.sh && rm mysql_install.sh",
   ]
 }
 
@@ -56,10 +51,8 @@ resource "ssh_resource" "web_init" {
   commands = [
     "sudo hostnamectl set-hostname webserver-${count.index}",
     "echo '127.0.0.1 webserver-${count.index}' | sudo tee -a /etc/hosts",
-    "sudo apt-get update",
-    "sudo apt-get upgrade -y",
-    "sudo apt-get install git mysql-server -y",
+    "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
-    "git clone --quiet git@github.com:rdewalt/Artsite.Gallery.git",
+    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git",
   ]
 }

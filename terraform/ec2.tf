@@ -17,6 +17,7 @@ resource "aws_instance" "webserver" {
   tags = {
     Name        = "Webserver-${count.index}"
     Environment = "${var.Environment}"
+    servertype  = "webserver"
   }
 
   root_block_device {
@@ -30,7 +31,7 @@ resource "aws_instance" "database" {
   instance_type           = var.database_ec2_size
   count                   = 1 # For future expansion, if I change this, change ssh_install.tf as well to adapt.
   ami                     = var.default_ami
-  disable_api_termination = true
+  disable_api_termination = false
   key_name                = var.keyname
   vpc_security_group_ids  = ["${aws_security_group.internal.id}"] #misnomer, SSH plus all inside the VPC
   subnet_id               = element(aws_subnet.public.*.id, count.index)
@@ -41,6 +42,7 @@ resource "aws_instance" "database" {
   tags = {
     Name        = "Database-${count.index}"
     Environment = "${var.Environment}"
+    servertype  = "database"
   }
 
   root_block_device {
