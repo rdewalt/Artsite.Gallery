@@ -20,9 +20,9 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-west-2"
-  access_key = "AKIA5UISCLSKN2W7BNGX"
-  secret_key = "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"
+  region     = env.AWS_REGION
+  access_key = env.AWS_ACCESS_KEY
+  secret_key = env.AWS_SECRET_ACCESS_KEY
 }
 
 #This key is, in this case, stored here in this repo.  NORMALLY this is not done, but since the candidate repo
