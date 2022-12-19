@@ -24,7 +24,7 @@ else
 
     export DEBIAN_FRONTEND="noninteractive" 
     sudo apt-get install mysql-server -y
-
+    sudo mv mysqld.conf /etc/mysql/mysql.conf.d/
     mysql -u root -e "create user 'yna'@'%' identified by '86753091024';"
     mysql -u root -e "create database yna;"
     mysql -u root -e "grant all on yna.* to 'yna'@'%';"

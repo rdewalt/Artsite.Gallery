@@ -71,7 +71,7 @@ variable "my_home_cidr" {
   default = ["67.182.47.219/32"]
 }
 
-variable "dbpass" {  # I don't care if you know the DB password, you can't get to it anyway and if you can get to it, I'm fucked anyway.
+variable "dbpass" { # I don't care if you know the DB password, you can't get to it anyway and if you can get to it, I'm fucked anyway.
   description = "The password for the DB master user"
   type        = string
   default     = "86753091024"

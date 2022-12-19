@@ -79,6 +79,12 @@ resource "ssh_resource" "web_init" {
     permissions = "0644"
   }
 
+  lifecycle {
+    replace_triggered_by = [
+      aws_instance.webserver
+    ]
+  }
+
   commands = [
     "sudo hostnamectl set-hostname webserver-${count.index}",
     "echo '127.0.0.1 webserver-${count.index}' | sudo tee -a /etc/hosts",
@@ -86,7 +92,7 @@ resource "ssh_resource" "web_init" {
     "sudo apt-get update",
     "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
-    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git",
+    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git 2>/dev/null",
     "sudo ./web-install.sh",
   ]
 }
