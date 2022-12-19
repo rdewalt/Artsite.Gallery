@@ -10,6 +10,7 @@ terraform {
   backend "s3" {
     bucket = "rwd-yna-terraform-bucket"
     key    = "backend/terraform.tfstate"
+    region = "us-west-2"
   }
   required_providers {
     ssh = {
