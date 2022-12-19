@@ -50,20 +50,29 @@ resource "ssh_resource" "web_init" {
   }
 
   file {
+    source      = "./files/web-install.sh"
+    destination = "web-install.sh"
+    permissions = "0770"
+  }
+
+  file {
     source      = "./files/nginx.conf"
     destination = "nginx.conf"
     permissions = "0644"
   }
+
   file {
     source      = "./files/php-fpm-pool-www.conf"
     destination = "php-fpm-pool-www.conf"
     permissions = "0644"
   }
+
   file {
     source      = "./files/php.ini"
     destination = "php.ini"
     permissions = "0644"
   }
+
   file {
     source      = "./files/sites-enabled-default"
     destination = "sites-enabled-default"
@@ -73,15 +82,11 @@ resource "ssh_resource" "web_init" {
   commands = [
     "sudo hostnamectl set-hostname webserver-${count.index}",
     "echo '127.0.0.1 webserver-${count.index}' | sudo tee -a /etc/hosts",
+    "echo '${aws_instance.database.0.private_ip} mysql' | sudo tee -a /etc/hosts",
     "sudo apt-get update",
-    "sudo apt-get install git nginx -y",
+    "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
     "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git",
-    "sudo chown root:root nginx.conf && sudo mv nginx.conf /etc/nginx/nginx.conf",
-    "sudo chown root:root sites-enabled-default && sudo mv nginx.conf /etc/nginx/sites-enabled/default",
-    "sudo chown root:root php.ini && sudo mv php.ini /etc/php/8.1/fpm/php.ini",
-    "sudo chown root:root php-fpm-pool-www.conf && sudo mv php.ini /etc/php/8.1/fpm/pool.d/www.conf",
-    "sudo systemctl restart php8.1-fpm",
-    "sudo systemctl restart nginx"
+    "sudo ./web-install.sh",
   ]
 }

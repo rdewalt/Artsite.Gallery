@@ -54,6 +54,9 @@ resource "aws_instance" "database" {
 
 resource "aws_route53_zone" "primary" {
   name = "solfire.com"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_route53_record" "database" {
