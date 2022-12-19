@@ -20,7 +20,7 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-west-2"
+  region = "us-west-2"
 }
 
 #This key is, in this case, stored here in this repo.  NORMALLY this is not done, but since the candidate repo
