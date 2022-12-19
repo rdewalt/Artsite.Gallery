@@ -4,6 +4,12 @@ resource "ssh_resource" "db_init" {
   host_user   = var.connect_user
   private_key = file("./rwd-yna.pem")
 
+  lifecycle {
+    replace_triggered_by = [
+      aws_instance.database
+    ]
+  }
+
   file {
     source      = "./files/mysql_install.sh"
     destination = "mysql_install.sh"
@@ -26,10 +32,12 @@ resource "ssh_resource" "db_init" {
     "sudo apt-get update",
     "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
-    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git",
+    "git clone --quiet git@github.com:rdewalt/Artsite.Gallery.git",
     "sudo ./mysql_install.sh",
   ]
 }
+
+
 resource "ssh_resource" "web_init" {
   count       = var.webserver_server_count
   host        = aws_instance.webserver[count.index].public_ip
@@ -92,7 +100,7 @@ resource "ssh_resource" "web_init" {
     "sudo apt-get update",
     "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",
-    "git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git 2>/dev/null",
+    "git clone --quiet git@github.com:rdewalt/Artsite.Gallery.git 2>/dev/null",
     "sudo ./web-install.sh",
   ]
 }

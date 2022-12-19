@@ -43,7 +43,7 @@ resource "aws_elb" "main-elb" {
 }
 
 resource "aws_route53_record" "yna-elb" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = "Z10381301HZKPQJ9VVOUJ"
   name    = "yna.solfire.com"
   type    = "A"
 

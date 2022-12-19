@@ -7,7 +7,7 @@ env:
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main"]
   pull_request:
     branches: [ "main" ]
 
@@ -39,6 +39,9 @@ jobs:
     - name: Create PEM file
       run: echo "${{ secrets.SSH_KEY }}" | tr -d '\r' > rwd-yna.pem
 
+    - name: fix permissions
+      run: chmod 0600 rwd-yna.pem
+
     # Create yna-int file
     - name: Create yna-int secret file
       run: echo "${{ secrets.RSA_FILE }}" | tr -d '\r' > files/yna-int
@@ -65,4 +68,5 @@ jobs:
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
+      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
