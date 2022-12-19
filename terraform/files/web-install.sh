@@ -6,7 +6,7 @@ then
     exit 0
 else
     apt-get install nginx php8.1-fpm php8.1-mysql -y
-    chown root:root nginx.comf
+    chown root:root nginx.conf
     chown root:root sites-enabled-default
     chown root:root php.ini
     chown root:root php-fpm-pool-www.conf
