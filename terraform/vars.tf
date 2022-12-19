@@ -47,27 +47,22 @@ variable "region_az_count" {
   default = 2
 }
 
-#Sets up the datasource for use in other locations. 
 data "aws_availability_zones" "available" {
   state = "available"
 }
 
-#In non-prod this may be set to "false", but just sets the EC2 Termination Protection defaults.
 variable "termination_protection" {
-  default = "true"
+  default = "false"
 }
 
-# EC2 Webserver counts for this deploymnt;
 variable "webserver_server_count" {
   default = 1
 }
 
-# EC2 Webserver machine size
 variable "database_ec2_size" {
   default = "t4g.medium"
 }
 
-# EC2 Webserver machine size
 variable "webserver_ec2_size" {
   default = "t4g.small"
 }
@@ -76,7 +71,7 @@ variable "my_home_cidr" {
   default = ["67.182.47.219/32"]
 }
 
-variable "dbpass" {
+variable "dbpass" {  # I don't care if you know the DB password, you can't get to it anyway and if you can get to it, I'm fucked anyway.
   description = "The password for the DB master user"
   type        = string
   default     = "86753091024"
