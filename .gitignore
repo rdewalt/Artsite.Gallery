@@ -10,3 +10,5 @@ terraform/lambdas/PIL/
 terraform/.terraform.lock.hcl
 terraform/lambdas/PIL
 *.zip
+ssh
+ssh/

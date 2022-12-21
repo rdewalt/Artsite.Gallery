@@ -1,8 +1,9 @@
 resource "ssh_resource" "db_init" {
-  host        = aws_instance.database.0.public_ip
-  user        = var.connect_user
-  host_user   = var.connect_user
-  private_key = file("./rwd-yna.pem")
+  host         = aws_instance.database.0.private_ip
+  user         = var.connect_user
+  host_user    = var.connect_user
+  bastion_host = aws_instance.bastion.public_ip
+  private_key  = file("./rwd-yna.pem")
 
   lifecycle {
     replace_triggered_by = [
@@ -39,11 +40,12 @@ resource "ssh_resource" "db_init" {
 
 
 resource "ssh_resource" "web_init" {
-  count       = var.webserver_server_count
-  host        = aws_instance.webserver[count.index].public_ip
-  user        = var.connect_user
-  host_user   = var.connect_user
-  private_key = file("./rwd-yna.pem")
+  count        = var.webserver_server_count
+  host         = aws_instance.webserver[count.index].private_ip
+  bastion_host = aws_instance.bastion.public_ip
+  user         = var.connect_user
+  host_user    = var.connect_user
+  private_key  = file("./rwd-yna.pem")
 
   file {
     source      = "./files/yna-int"

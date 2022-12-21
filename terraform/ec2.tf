@@ -12,8 +12,9 @@ resource "aws_instance" "webserver" {
   subnet_id               = element(aws_subnet.public.*.id, count.index)
   availability_zone       = element(data.aws_availability_zones.available.names, count.index)
 
-  associate_public_ip_address = true
+  #  associate_public_ip_address = true
 
+  depends_on = [aws_instance.bastion]
   tags = {
     Name        = "Webserver-${count.index}"
     Environment = "${var.Environment}"
@@ -37,7 +38,9 @@ resource "aws_instance" "database" {
   subnet_id               = element(aws_subnet.public.*.id, count.index)
   availability_zone       = element(data.aws_availability_zones.available.names, count.index)
 
-  associate_public_ip_address = true
+  #  associate_public_ip_address = true
+
+  depends_on = [aws_instance.bastion]
 
   tags = {
     Name        = "Database-${count.index}"

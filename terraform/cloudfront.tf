@@ -80,7 +80,6 @@ resource "aws_cloudfront_distribution" "s3_thumbs_distribution" {
     origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.s3_origin_id
   }
-
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
@@ -135,5 +134,30 @@ resource "aws_cloudfront_distribution" "s3_thumbs_distribution" {
   }
   viewer_certificate {
     cloudfront_default_certificate = true
+  }
+}
+
+
+resource "aws_route53_record" "cdn1" {
+  zone_id = "Z10381301HZKPQJ9VVOUJ"
+  name    = "cdn1.yna.solfire.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "cdn2" {
+  zone_id = "Z10381301HZKPQJ9VVOUJ"
+  name    = "cdn2.yna.solfire.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.s3_thumbs_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_thumbs_distribution.hosted_zone_id
+    evaluate_target_health = true
   }
 }
