@@ -9,8 +9,9 @@ resource "aws_instance" "webserver" {
   disable_api_termination = var.termination_protection
   key_name                = var.keyname
   vpc_security_group_ids  = ["${aws_security_group.webserver.id}"] #misnomer, SSH plus all inside the VPC
-  subnet_id               = element(aws_subnet.public.*.id, count.index)
-  availability_zone       = element(data.aws_availability_zones.available.names, count.index)
+  subnet_id               = aws_subnet.private.id
+  #  subnet_id               = element(aws_subnet.public.*.id, count.index)
+  #  availability_zone       = element(data.aws_availability_zones.available.names, count.index)
 
   #  associate_public_ip_address = true
 
@@ -35,8 +36,9 @@ resource "aws_instance" "database" {
   disable_api_termination = var.termination_protection
   key_name                = var.keyname
   vpc_security_group_ids  = ["${aws_security_group.internal.id}"] #misnomer, SSH plus all inside the VPC
-  subnet_id               = element(aws_subnet.public.*.id, count.index)
-  availability_zone       = element(data.aws_availability_zones.available.names, count.index)
+  subnet_id               = aws_subnet.private.id
+  #  subnet_id               = element(aws_subnet.public.*.id, count.index)
+  #  availability_zone       = element(data.aws_availability_zones.available.names, count.index)
 
   #  associate_public_ip_address = true
 
@@ -53,4 +55,21 @@ resource "aws_instance" "database" {
     volume_type = "gp3"
   }
 
+}
+
+
+resource "aws_route53_record" "db" {
+  zone_id = "Z10381301HZKPQJ9VVOUJ"
+  name    = "yna-db.solfire.com"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.database.0.private_ip]
+}
+
+resource "aws_route53_record" "web" {
+  zone_id = "Z10381301HZKPQJ9VVOUJ"
+  name    = "yna-web.solfire.com"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.webserver.0.private_ip]
 }

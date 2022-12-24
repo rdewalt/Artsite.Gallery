@@ -7,8 +7,6 @@ then
 else
     dbpass="86753091024"
     password="86753091024"
-    ssh-keyscan github.com >> ~/.ssh/known_hosts
-    git clone --quiet --branch dev git@github.com:rdewalt/Artsite.Gallery.git
 
     echo PURGE | sudo debconf-communicate mysql-community-server
     sudo apt purge mysql-client mysql-server
@@ -24,11 +22,11 @@ else
 
     export DEBIAN_FRONTEND="noninteractive" 
     sudo apt-get install mysql-server -y
-    sudo mv mysqld.cnf /etc/mysql/mysql.conf.d/
+    sudo cp /home/ubuntu/Artsite.Gallery/terraform/files/mysqld.cnf /etc/mysql/mysql.conf.d/
     mysql -u root -e "create user 'yna'@'%' identified by '86753091024';"
     mysql -u root -e "create database yna;"
     mysql -u root -e "grant all on yna.* to 'yna'@'%';"
-    mysql -u root yna < Artsite.Gallery/sql/yart.sql 
-
+    mysql -u root yna < /home/ubuntu/Artsite.Gallery/sql/yart.sql 
+    service mysql restart
     touch /home/ubuntu/.mysql_install_complete
 fi

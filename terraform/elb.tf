@@ -4,22 +4,23 @@
 resource "aws_elb" "main-elb" {
   name     = "main-elb"
   internal = "false"
-
-  subnets = flatten(["${aws_subnet.public.*.id}"])
+  subnets  = flatten(["${aws_subnet.public.*.id}"])
 
   listener {
     instance_port     = 80
-    instance_protocol = "tcp"
+    instance_protocol = "http"
     lb_port           = 80
-    lb_protocol       = "tcp"
+    lb_protocol       = "http"
   }
 
   listener {
-    instance_port     = 80
-    instance_protocol = "tcp"
-    lb_port           = 443
-    lb_protocol       = "tcp"
+    instance_port      = 80
+    instance_protocol  = "http"
+    lb_port            = 443
+    lb_protocol        = "https"
+    ssl_certificate_id = "arn:aws:acm:us-west-2:936877644948:certificate/532d60c6-10f5-42e7-84f2-f10e10c6c0a7"
   }
+
 
   health_check {
     healthy_threshold   = 2
