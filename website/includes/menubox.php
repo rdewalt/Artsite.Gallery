@@ -40,8 +40,7 @@ if (login_check()) {
 	}
 else {
 	?>
-		<a href="login_page.php">Login</a>
-		<a href="register.php">Register</a>
+		<a href="https://yna-signup.auth.us-west-2.amazoncognito.com/login?response_type=code&client_id=5h9g4gpmipec6gmaiqmk0dcso6&redirect_uri=https%3A%2F%2Fyna.solfire.com%2Fcognito.php">Login / Register</a>
 	<?php
 	}
 ?>
