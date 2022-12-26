@@ -49,7 +49,7 @@ curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
         "Content-type: application/x-www-form-urlencoded",
-        "Authorization: Bearer " . base64_encode("$access_token");
+        "Authorization: Bearer " . $access_token
     ]
 ]);
 

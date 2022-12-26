@@ -6,9 +6,9 @@ env_setup.sh
 *.pem
 yna-int
 yna-int.pub
-terraform/lambdas/PIL/
+terraform/lambdas/thumbnails/PIL/
 terraform/.terraform.lock.hcl
-terraform/lambdas/PIL
+terraform/lambdas/thumbnails/PIL
 *.zip
 ssh
 ssh/
