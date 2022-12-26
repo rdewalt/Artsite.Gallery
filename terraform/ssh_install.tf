@@ -48,9 +48,9 @@ resource "ssh_resource" "web_init" {
   private_key  = file("./rwd-yna.pem")
 
   file {
-    source      = "./files/credentials"
-    destination = "credentials"
-    permissions = "0660"
+    source      = "~/.aws/yna-uploadable-credentials"
+    destination = ".aws/credentials"
+    permissions = "0600"
   }
   file {
     source      = "./files/yna-int"
