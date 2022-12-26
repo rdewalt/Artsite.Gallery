@@ -12,3 +12,4 @@ terraform/lambdas/PIL
 *.zip
 ssh
 ssh/
+website/vendor/

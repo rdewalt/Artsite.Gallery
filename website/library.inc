@@ -1,7 +1,14 @@
 <?php
-$SITENAME="Artticus: Refrigerator Door of the Internet";
-$SITEHTTPS="https://www.arttic.us/";
-$SITEURL="www.arttic.us";
+
+require 'vendor/autoload.php';
+
+use Aws\Iam\IamClient;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
+$SITENAME="YNA: You Need Art";
+$SITEHTTPS="https://yna.solfire.com/";
+$SITEURL="yna.solfire.com";
 global $ICONS;
 $ICONS['filefolder']="<span class=\"fileFolder\">&#128194;</span>";
 $ICONS['configure']="<span class=\"setupIcon\">&#9881;</span>";
@@ -15,39 +22,7 @@ include_once ("includes/bbcode_basic.php");
 include_once ("includes/image.php");
 include_once ("includes/comment.php");
 
-function sec_session_start() {
-    session_start();
-    if (
-        (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id']) ) &&
-          (!isset($_SESSION['username']) && isset($_COOKIE['username']) ) &&
-            (!isset($_SESSION['login_string']) && isset($_COOKIE['fridgeCode']) )
-      )
-       {
-                    $_SESSION['user_id'] = $_COOKIE['user_id'];
-                    $_SESSION['username'] = $_COOKIE['username'];
-                    $_SESSION['login_string'] = $_COOKIE['fridgeCode'];
-                    if (login_check()!=true) {
-                        header ("Location: /logout.php");
-                      }
-       }
-    session_regenerate_id(true);
-}
-
-function otpKeyGrab($email)
-{   //Pull the otpKey
-    $dbh=getDBH();
-    $sql="SELECT ss FROM users,tfa WHERE users.id=tfa.id and email = :UserEmail";
-    if ($stmt = $dbh->prepare($sql)) {
-        $stmt->bindParam(':UserEmail', $email);
-        $stmt->execute();
-        $foo=$stmt->fetchAll();
-        if (count($foo) == 1) {
-                $UserSecret = $foo[0]['ss'];
-                return $UserSecret;
-                }
-        }
-}
-
+session_start();
 
 function esc_url($url) {
 
@@ -102,6 +77,7 @@ function toTen($num, $b=62) {
   }
   return $res;
 }
+
 function getArtist($UserIdent)
    {
     $dbh=getDBH();
@@ -141,6 +117,4 @@ function getArtistIcon($UserIdent)
     return $avatar;
    }
 
-
-sec_session_start();
 ?>

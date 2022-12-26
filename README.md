@@ -18,5 +18,5 @@ SSH skills enough to set up a ssh config for using a bastion.
 
 Skill to modify my shitty PHP to fit your settings.  
 
-
-You will need to know git enough to setup the Secrets in case you want to use the CI/CD pipeline I have setup.
+# Other things.
+You will also need to know git enough to setup the Secrets in case you want to use the CI/CD pipeline I have setup.

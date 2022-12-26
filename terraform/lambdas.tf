@@ -1,9 +1,10 @@
 data "archive_file" "thumbnail_lambda_package" {
   type = "zip"
   #  source_file = "./lambdas/create_thumbnail.py"
-  source_dir  = "./lambdas/"
+  source_dir  = "./lambdas/thumbnails/"
   output_path = "thumbs.zip"
 }
+
 
 resource "aws_lambda_function" "test_lambda_function" {
   function_name    = "create_thumbnails"

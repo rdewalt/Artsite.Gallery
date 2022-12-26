@@ -11,6 +11,15 @@ resource "aws_iam_policy" "ec2_policy" {
           "Effect" : "Allow",
           "Action" : "s3:*",
           "Resource" : ["arn:aws:s3:::YNA_IMAGES/*", "arn:aws:s3:::YNA_IMAGES_THUMBS/*"],
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource" : "*"
         }
       ]
     }
