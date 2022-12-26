@@ -9,6 +9,7 @@ yna-int.pub
 terraform/lambdas/thumbnails/PIL/
 terraform/.terraform.lock.hcl
 terraform/lambdas/thumbnails/PIL
+terraform/files/credentials
 *.zip
 ssh
 ssh/

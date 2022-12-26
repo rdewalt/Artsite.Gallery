@@ -5,7 +5,7 @@ then
     echo "Install already completed."
     exit 0
 else
-    apt-get install nginx php8.1-fpm php8.1-mysql php8.1-curl composer -y
+    apt-get install nginx php8.1-fpm php8.1-mysql php8.1-curl php8.1-xml composer -y
     chown root:root nginx.conf
     chown root:root sites-enabled-default
     chown root:root php.ini
@@ -16,6 +16,8 @@ else
     mv php-fpm-pool-www.conf /etc/php/8.1/fpm/pool.d/www.conf
     systemctl restart php8.1-fpm
     systemctl restart nginx
+    mkdir /home/ubuntu/.aws/
+    mv /home/ubuntu/Artsite.Gallery/terraform/files/credentials /home/ubuntu/.aws/
     cd /home/ubuntu/Artsite.Gallery/website && composer require aws/aws-sdk-php
     touch /home/ubuntu/.web_install_complete
 fi

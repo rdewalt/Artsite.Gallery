@@ -11,7 +11,7 @@ resource "ssh_resource" "db_init" {
     ]
   }
 
-  file {
+    file {
     source      = "./files/mysql_install.sh"
     destination = "mysql_install.sh"
     permissions = "0755"
@@ -47,6 +47,11 @@ resource "ssh_resource" "web_init" {
   host_user    = var.connect_user
   private_key  = file("./rwd-yna.pem")
 
+  file {
+    source      = "./files/credentials"
+    destination = "credentials"
+    permissions = "0660"
+  }
   file {
     source      = "./files/yna-int"
     destination = ".ssh/id_rsa"
