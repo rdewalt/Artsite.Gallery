@@ -74,10 +74,10 @@ print_r($response);
 $C_UID=$response["sub"];
 // Set into cookies that expire when we're told they can.
 
-$_SESSION("I")=$id_token;
-$_SESSION("A")=$access_token;
-$_SESSION("R")=$refresh_token;
-$_SESSION("U")=$C_UID;
+$_SESSION["I"]=$id_token;
+$_SESSION["A"]=$access_token;
+$_SESSION["R"]=$refresh_token;
+$_SESSION["U"]=$C_UID;
 $_SESSION['loggedin'] = true;
 
 setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
