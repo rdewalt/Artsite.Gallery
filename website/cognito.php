@@ -1,4 +1,4 @@
-<pre><?php
+<?php
 session_start();
 require 'vendor/autoload.php';
 use Aws\Iam\IamClient;
@@ -46,9 +46,6 @@ $access_token=$response["access_token"];
 $refresh_token=$response["refresh_token"];
 $expires_in=$response["expires_in"];
 
-
-print_r($response);
-
 curl_setopt_array($ch, [
     CURLOPT_URL => "$cognito_domain/oauth2/userInfo?" . http_build_query([
         'client_id'     => $client_id,
@@ -66,24 +63,23 @@ curl_setopt_array($ch, [
 ]);
 
 $response = json_decode(curl_exec($ch),true);
-print "<hr>";
-print base64_decode($id_token);
-print "<hr> Okay, this is the logged in part.<br>";
 print_r($response);
 
 $C_UID=$response["sub"];
+$folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
+
 // Set into cookies that expire when we're told they can.
 
 $_SESSION["I"]=$id_token;
 $_SESSION["A"]=$access_token;
 $_SESSION["R"]=$refresh_token;
 $_SESSION["U"]=$C_UID;
+$_SESSION["folder"]= $folder;
 $_SESSION['loggedin'] = true;
 
 setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
 
 #create blank S3 buckets for the user's images. We need to create both, because thumbnailer won't work if the destination isn't there.
-$folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
 
 $bucket= "yna-images";
 $s3Client ->putObject(array(
