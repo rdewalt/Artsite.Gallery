@@ -145,29 +145,6 @@ CREATE TABLE `comments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `email_hashes`
---
-
-DROP TABLE IF EXISTS `email_hashes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `email_hashes` (
-  `email` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  KEY `idx_email_hashes_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `email_hashes`
---
-
-LOCK TABLES `email_hashes` WRITE;
-/*!40000 ALTER TABLE `email_hashes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `email_hashes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `image_faves`
 --
 
@@ -230,53 +207,6 @@ CREATE TABLE `images` (
 ) ENGINE=MyISAM AUTO_INCREMENT=158 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `login_attempts`
---
-
-DROP TABLE IF EXISTS `login_attempts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `login_attempts` (
-  `user_id` int(11) NOT NULL,
-  `whenfailed` varchar(30) NOT NULL,
-  KEY `idx_login_attempts_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `pass_reset`
---
-
-DROP TABLE IF EXISTS `pass_reset`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pass_reset` (
-  `email` varchar(50) NOT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `submitted` datetime DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
---
--- Table structure for table `tfa`
---
-
-DROP TABLE IF EXISTS `tfa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tfa` (
-  `id` int(10) unsigned DEFAULT NULL,
-  `ss` char(32) DEFAULT NULL,
-  KEY `idx_tfa_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `userbans`
---
 
 DROP TABLE IF EXISTS `userbans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -288,10 +218,6 @@ CREATE TABLE `userbans` (
   KEY `idx_userbans_banid` (`banid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `userbans`
---
 
 --
 -- Table structure for table `users`

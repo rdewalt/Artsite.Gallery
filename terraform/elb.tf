@@ -43,6 +43,21 @@ resource "aws_elb" "main-elb" {
   }
 }
 
+
+resource "aws_lb_cookie_stickiness_policy" "foo" {
+  name                     = "foo-policy"
+  load_balancer            = aws_elb.main-elb.id
+  lb_port                  = 80
+  cookie_expiration_period = 86400
+}
+
+resource "aws_lb_cookie_stickiness_policy" "foo2" {
+  name                     = "foo2-policy"
+  load_balancer            = aws_elb.main-elb.id
+  lb_port                  = 443
+  cookie_expiration_period = 86400
+}
+
 resource "aws_route53_record" "yna-elb" {
   zone_id = "Z10381301HZKPQJ9VVOUJ"
   name    = "yna.solfire.com"

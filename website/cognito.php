@@ -1,7 +1,6 @@
 <pre><?php
 
 require 'vendor/autoload.php';
-
 use Aws\Iam\IamClient;
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
@@ -11,6 +10,7 @@ $s3Client = new S3Client([
     'region' => 'us-west-2',
     'version' => '2006-03-01'
 ]);
+
 
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
@@ -66,20 +66,25 @@ curl_setopt_array($ch, [
 ]);
 
 $response = json_decode(curl_exec($ch),true);
+print "<hr>";
+print base64_decode($id_token);
 print "<hr> Okay, this is the logged in part.<br>";
 print_r($response);
 
 $C_UID=$response["sub"];
 // Set into cookies that expire when we're told they can.
-setcookie("I",$id_token, time()+$expires_in,"/","yna.solfire.com",1,1);
-setcookie("A",$access_token, time()+$expires_in,"/","yna.solfire.com",1,1);
-setcookie("R",$refresh_token, time()+$expires_in,"/","yna.solfire.com",1,1);
+
+$_SESSION("I")=$id_token;
+$_SESSION("A")=$access_token;
+$_SESSION("R")=$refresh_token;
+$_SESSION("U")=$C_UID;
+
 setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
- 
-#create blank S3 buckets for the user's images
-print "<hr>" . left($C_UID,2);
-$bucket= "yna-images";
+
+#create blank S3 buckets for the user's images. We need to create both, because thumbnailer won't work if the destination isn't there.
 $folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
+
+$bucket= "yna-images";
 $s3Client ->putObject(array(
     'Bucket' => $bucket,
     'Key'    => $folder,
