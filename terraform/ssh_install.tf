@@ -11,7 +11,7 @@ resource "ssh_resource" "db_init" {
     ]
   }
 
-    file {
+  file {
     source      = "./files/mysql_install.sh"
     destination = "mysql_install.sh"
     permissions = "0755"

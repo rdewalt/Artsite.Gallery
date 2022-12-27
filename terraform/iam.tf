@@ -73,4 +73,20 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 resource "aws_iam_role" "thumbnail_lambda_role" {
   name               = "thumbnail_lambda_role"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
+
+  inline_policy {
+    name = "my_inline_policy"
+
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = ["s3:*"]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    })
+  }
+
 }

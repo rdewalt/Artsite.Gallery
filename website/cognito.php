@@ -1,5 +1,17 @@
 <pre><?php
 
+require 'vendor/autoload.php';
+
+use Aws\Iam\IamClient;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
+$s3Client = new S3Client([
+    'profile' => 'default',
+    'region' => 'us-west-2',
+    'version' => '2006-03-01'
+]);
+
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
 $redirect_uri = "https://yna.solfire.com/cognito.php";
@@ -57,9 +69,29 @@ $response = json_decode(curl_exec($ch),true);
 print "<hr> Okay, this is the logged in part.<br>";
 print_r($response);
 
+$C_UID=$response["sub"];
 // Set into cookies that expire when we're told they can.
 setcookie("I",$id_token, time()+$expires_in,"/","yna.solfire.com",1,1);
 setcookie("A",$access_token, time()+$expires_in,"/","yna.solfire.com",1,1);
 setcookie("R",$refresh_token, time()+$expires_in,"/","yna.solfire.com",1,1);
-setcookie("U",$response["sub"], time()+$expires_in,"/","yna.solfire.com",1,1);
+setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
+ 
+#create blank S3 buckets for the user's images
+print "<hr>" . left($C_UID,2);
+$bucket= "yna-images";
+$folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
+$s3Client ->putObject(array(
+    'Bucket' => $bucket,
+    'Key'    => $folder,
+    'Body'   => "",
+    'ACL'    => 'public-read'
+   ));
+
+$bucket= "yna-images-resized";
+$s3Client ->putObject(array(
+    'Bucket' => $bucket,
+    'Key'    => $folder,
+    'Body'   => "",
+    'ACL'    => 'public-read'
+   ));
 ?>
