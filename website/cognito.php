@@ -1,5 +1,5 @@
 <pre><?php
-
+session_start();
 require 'vendor/autoload.php';
 use Aws\Iam\IamClient;
 use Aws\S3\S3Client;
@@ -102,5 +102,5 @@ $s3Client ->putObject(array(
    ));
 
 
-   
+
 ?>
