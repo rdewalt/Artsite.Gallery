@@ -78,6 +78,7 @@ $_SESSION("I")=$id_token;
 $_SESSION("A")=$access_token;
 $_SESSION("R")=$refresh_token;
 $_SESSION("U")=$C_UID;
+$_SESSION['loggedin'] = true;
 
 setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
 
@@ -99,4 +100,7 @@ $s3Client ->putObject(array(
     'Body'   => "",
     'ACL'    => 'public-read'
    ));
+
+
+   
 ?>
