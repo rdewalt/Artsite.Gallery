@@ -16,8 +16,7 @@ if ($_SERVER['SCRIPT_NAME']=='/index.php')
 	}
 }
 
-if (login_check()) {
-
+if (login_check() && $_SESSION["ADULT"]=="Y") {
 	if (isset($_SESSION['NSFW'])){
 		$NSFW=$_SESSION['NSFW'];
 	} else {
