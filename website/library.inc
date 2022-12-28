@@ -9,7 +9,7 @@ use Aws\Exception\AwsException;
 $SITENAME="YNA: You Need Art";
 $SITEHTTPS="https://yna.solfire.com/";
 $SITEURL="yna.solfire.com";
-global $ICONS; 
+global $ICONS;
 $ICONS['filefolder']="<span class=\"fileFolder\">&#128194;</span>";
 $ICONS['configure']="<span class=\"setupIcon\">&#9881;</span>";
 
@@ -81,7 +81,7 @@ function toTen($num, $b=62) {
 function getArtist($UserIdent)
    {
     $dbh=getDBH();
-    $sql = "select users.username, users.email, shard,images.Medium from users left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where users.id = :UserIdent";
+    $sql = "select users.username, users.email, shard, from users left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where users.id = :UserIdent";
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':UserIdent',$UserIdent);
     $sth->execute();
@@ -102,7 +102,7 @@ function getArtist($UserIdent)
 function getArtistIcon($UserIdent)
    {
     $dbh=getDBH();
-    $sql = "select users.username, users.email, shard,images.Medium from users left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where users.id = :UserIdent";
+    $sql = "select users.username, users.email, shard from users left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where users.id = :UserIdent";
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':UserIdent',$UserIdent);
     $sth->execute();
