@@ -1,5 +1,11 @@
 <?php
 
+require 'vendor/autoload.php';
+
+use Aws\Iam\IamClient;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
 include_once 'library.inc';
 login_check();
 
