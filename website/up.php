@@ -83,7 +83,7 @@ $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where
         $stmt->bindParam(':UserID', $UserID);
         $stmt->bindParam(':ShortID', $ShortImage);
         $stmt->bindParam(':State', $State);
-        $stmt->bindParam(':Filename', $Filename);
+        $stmt->bindParam(':Filename', $ShortImage . "." . $Ext);
         $stmt->execute();
     }
 
