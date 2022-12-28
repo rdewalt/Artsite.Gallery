@@ -125,12 +125,8 @@ if ( count($foo) )  {
     }
 }
 
-// Log that user in androll that beautiful bean footage.
     setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
 
     header ("Location: /");
-
-#create blank S3 buckets for the user's images. We need to create both, because thumbnailer won't work if the destination isn't there.
-
 
 ?>
