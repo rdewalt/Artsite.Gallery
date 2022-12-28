@@ -25,7 +25,7 @@ if ($_FILES['Thumbnail']['error']==0) { $ThumbnailYes=true; } else 	{ $Thumbnail
 	if (isset($_POST['skip'])) {$SkipRecent=$_POST['skip']; }
 
 	$OriginalFilename=$_FILES['Image']['name'];
-	$Shard=$_SESSION["folder"]
+	$Shard=$_SESSION["folder"];
 	$UserID=$_SESSION['user_id'];
 	$dbh=getDBH();
 	
