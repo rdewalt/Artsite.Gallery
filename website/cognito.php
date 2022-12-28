@@ -137,6 +137,11 @@ $s3Client ->putObject(array(
    ));
 
 
+if ($DEBUG){ 
+    print "<hr>";
+    print_r ($_SESSION);
+}
+
 if (!$DEBUG){ 
 header ("Location: /");
 }
