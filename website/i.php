@@ -89,9 +89,6 @@ In Favorites! <a onClick="UnFave();" onMouseOver="this.innerHTML='(Remove)';" on
 <?
 }
 ?>
-<a onClick="SwapImage();">Toggle View</a> | 
-<a href="https://arttic.us/<?=$img->ShortID?>" onMouseOver="this.innerHTML='https://arttic.us/<?=$img->ShortID?>';" onMouseOut="this.innerHTML='Quick Link';">Quick Link</a> | 
-<a href="<?=$img->FullImage?>" onMouseOver="this.innerHTML='https://arttic.us/<?=$img->FullImage?>';" onMouseOut="this.innerHTML='Direct Link';">Direct Link</a><br><br>
 </center>
 </div>
 <div class="postimage">
