@@ -9,10 +9,10 @@ if ($_SERVER['SCRIPT_NAME']!='/u.php')
 			$DisplayStyle="I";
 		}
 	if($DisplayStyle=="T") {
-			?> <a href="display_toggle.php?T=I">(Timeline)</a>&nbsp; <?
+			?> <a href="display_toggle.php?T=I">(Timeline View)</a>&nbsp; <?
 		}
 		else {
-			?> <a href="display_toggle.php?T=T">(Grid)</a>&nbsp; <?
+			?> <a href="display_toggle.php?T=T">(Grid View)</a>&nbsp; <?
 	}
 }
 

@@ -75,7 +75,7 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
 //	copy ("$TempFile","$GDir/$Filename");
 // 	$ThumbFile="$GDir/$Thumbnail";
 
-
+if (isset($_POST['skip'])) {$SkipRecent=$_POST['skip']; } else {$State="L";}
 if ($SkipRecent=="Y") {$State="Y";} else {$State="L";}
 $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where ImageID=:ImageID and UserID=:UserID";
     if ($stmt = $dbh->prepare($sql)) {
