@@ -13,7 +13,7 @@ $client = new CognitoIdentityProviderClient([
     'version' => '2006-03-01'
 ]);
 
-$result = $client=>listUserPools([
+$result = $client->listUserPools([
     'MaxResults' => 100
 ]);
 
