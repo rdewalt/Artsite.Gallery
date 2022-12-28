@@ -78,4 +78,5 @@ function login_check() {
         return false;
 }
 
+}
 ?>
