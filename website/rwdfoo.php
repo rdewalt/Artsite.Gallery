@@ -1,4 +1,6 @@
 <?php
+$my_uid="50543915-1090-41e1-95cc-b55d3cf0b4b2";
+$user_pool_id="us-west-2_tfaLXU1i7";
 
 require 'vendor/autoload.php';
 
@@ -18,6 +20,8 @@ $result = $client->listUserPools([
 ]);
 
 print "<pre>";
+print_r($_SESSION);
+print "<hr>";
 print_r($result);
 /*
 $s3Client = new S3Client([
