@@ -1,16 +1,6 @@
 <?php
-session_start();
+require "library.inc";
 require 'vendor/autoload.php';
-use Aws\Iam\IamClient;
-use Aws\S3\S3Client;
-use Aws\Exception\AwsException;
-
-$s3Client = new S3Client([
-    'profile' => 'default',
-    'region' => 'us-west-2',
-    'version' => '2006-03-01'
-]);
-
 
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
@@ -63,10 +53,9 @@ curl_setopt_array($ch, [
 ]);
 
 $response = json_decode(curl_exec($ch),true);
-print_r($response);
-
 $C_UID=$response["sub"];
-$folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
+$C_UN=$response["username"];
+$C_Email=$response["email"];
 
 // Set into cookies that expire when we're told they can.
 
@@ -77,26 +66,71 @@ $_SESSION["U"]=$C_UID;
 $_SESSION["folder"]= $folder;
 $_SESSION['loggedin'] = true;
 
-setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
+// OKAY, here we do the new user check and setup.
+$dbh=getDBH();
+$sql = "select * from users where cog_id = :CID";
+$sth = $dbh->prepare($sql);
+$sth->bindParam(':CID',$C_UID);
+$sth->execute();
+$foo=$sth->fetchAll();
+if ( count($foo)<1 )  {
+
+    // User not found! yay!
+
+    $sql="insert into users values (NULL,:UserName,:Email,'U',:UserID, now() )";
+    if ($stmt = $dbh->prepare($sql)) {
+        $stmt->bindParam(':UserID', $C_UID);
+        $stmt->bindParam(':Email', $C_Email);
+        $stmt->bindParam(':UserName', $C_UN);
+        $stmt->execute();
+    }
+
+    // Create user's S3 bucketry.
+    $folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
+    $s3Client = new S3Client([
+        'profile' => 'default',
+        'region' => 'us-west-2',
+        'version' => '2006-03-01'
+    ]);
+    
+    $bucket= "yna-images";
+
+    $s3Client ->putObject(array(
+        'Bucket' => $bucket,
+        'Key'    => $folder,
+        'Body'   => "",
+        'ACL'    => 'public-read'
+       ));
+    
+    $bucket= "yna-images-resized";
+    $s3Client ->putObject(array(
+        'Bucket' => $bucket,
+        'Key'    => $folder,
+        'Body'   => "",
+        'ACL'    => 'public-read'
+       ));
+        
+
+}
+
+$sql = "select * from users where cog_id = :CID";
+$sth = $dbh->prepare($sql);
+$sth->bindParam(':CID',$C_UID);
+$sth->execute();
+$foo=$sth->fetchAll();
+if ( count($foo) )  {
+    foreach($foo as $u) {
+        $_SESSION['username']=$u['username'];
+        $_SESSION['user_id']=$u['id'];
+    }
+}
+
+// Log that user in androll that beautiful bean footage.
+    setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
+
+    header ("Location: /");
 
 #create blank S3 buckets for the user's images. We need to create both, because thumbnailer won't work if the destination isn't there.
-
-$bucket= "yna-images";
-$s3Client ->putObject(array(
-    'Bucket' => $bucket,
-    'Key'    => $folder,
-    'Body'   => "",
-    'ACL'    => 'public-read'
-   ));
-
-$bucket= "yna-images-resized";
-$s3Client ->putObject(array(
-    'Bucket' => $bucket,
-    'Key'    => $folder,
-    'Body'   => "",
-    'ACL'    => 'public-read'
-   ));
-
 
 
 ?>

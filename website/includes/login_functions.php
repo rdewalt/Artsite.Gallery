@@ -1,5 +1,7 @@
 <?php
 
+/*
+// Cognito replaced the need for these.
 function userLogin($email, $password, $RememberMe) {
 	$dbh=getDBH();
 	$sql="SELECT id, username, password FROM users WHERE email = :UserEmail";
@@ -25,10 +27,6 @@ function userLogin($email, $password, $RememberMe) {
                     $_SESSION['login_string'] = hash('sha512', $UserPassword . $user_browser);
                     // Login successful.
                     if ($RememberMe=="Y") {
-                        // Also set up cookies for post-session piece, but stick with Session while we can.
-//                        setcookie("user_id",$UserID,strtotime( '+7 days' ),'/','arttic.us',true,true);
-//                        setcookie("username",$UserName,strtotime( '+7 days' ),'/','arttic.us',true,true);
-//                       setcookie("login_string",$_SESSION['login_string'],strtotime( '+7 days' ),'/','arttic.us',true,true);
                         setcookie("user_id",$UserID,strtotime( '+365 days' ),'/');
                         setcookie("username",$UserName,strtotime( '+365 days' ),'/'   );
                         setcookie("fridgeCode",$_SESSION['login_string'],strtotime( '+365 days' ),'/');
@@ -51,7 +49,6 @@ function userLogin($email, $password, $RememberMe) {
         }
     }
 }
-
 function checkbrute($user_id) {
 	$MAX_FAILED_LOGINS = 5; // Past this, your account is locked for a bit.
     $now = time();
@@ -69,44 +66,16 @@ function checkbrute($user_id) {
             return false; // NO, there have not.
         }
 	}
+*/
+
 
 function login_check() {
-	$dbh=getDBH();
-    // Check if all session variables are set
-    if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string']))
+    if (isset($_SESSION["I"],$_SESSION["A"],$_SESSION["R"],$_SESSION["U"],$_COOKIE["U"]))
     {
-        $user_id = $_SESSION['user_id'];
-        $login_string = $_SESSION['login_string'];
-        $username = $_SESSION['username'];
-        $user_browser = $_SERVER['HTTP_USER_AGENT'];
- 		$sql="SELECT password FROM users WHERE id = :UserID LIMIT 1";
-        if ($stmt = $dbh->prepare($sql)) {
-            $stmt->bindParam(':UserID', $user_id);
-	        $stmt->execute();
-	        $foo=$stmt->fetchAll();
-            if (count($foo) == 1) {
-                $password=$foo[0]['password'];
-                $login_check = hash('sha512', $password . $user_browser);
-                if (hash_equals($login_check, $login_string) ){
-                    // Logged In!!!!
-                    $_SESSION['loggedin']=true;
-                    return true;
-                } else {
-                    // Not logged in
-                    return false;
-                }
+        $_SESSION['loggedin']=true;
+        return true;
             } else {
-                // Not logged in
-                return false;
-            }
-        } else {
-            // Not logged in
-            return false;
-        }
-    } else {
-        // Not logged in
         return false;
-    }
 }
 
 ?>
