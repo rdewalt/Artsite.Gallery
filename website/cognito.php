@@ -1,5 +1,5 @@
 <?php
-$DEBUG=1;
+$DEBUG=0;
 
 if ($DEBUG){ 
     print "<pre>";
@@ -69,12 +69,14 @@ if ($DEBUG){
 $C_UID=$response["sub"];
 $C_UN=$response["username"];
 $C_Email=$response["email"];
+$C_Birthdate=$response["birthdate"];
 $folder= "a/". substr($C_UID,0,2) . "/" . $C_UID . "/";
 
 $_SESSION["I"]=$id_token;
 $_SESSION["A"]=$access_token;
 $_SESSION["R"]=$refresh_token;
 $_SESSION["U"]=$C_UID;
+$_SESSION["B"]=$C_Birthdate;
 $_SESSION["folder"]= $folder; 
 $_SESSION['loggedin'] = true;
 
@@ -128,20 +130,6 @@ $s3Client ->putObject(array(
     'Body'   => "",
     'ACL'    => 'public-read'
    ));
-
-$client = new CognitoIdentityProviderClient([
-    'profile' => 'default',
-    'region' => 'us-west-2',
-    'version' => '2016-04-18'
-]);
-
-$response = $client->getUser([
-    'AccessToken' => $access_token, // REQUIRED
-]);
-if ($DEBUG){ 
-    print "<hr>";
-    print_r ($response);
-}
 
 
 if (!$DEBUG){ 
