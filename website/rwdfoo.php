@@ -17,8 +17,8 @@ $client = new CognitoIdentityProviderClient([
     'version' => '2016-04-18'
 ]);
 
-$result = $client->listUserPools([
-    'MaxResults' => 10
+$result = $client->getUser([
+    'AccessToken' => $_SESSION["A"], // REQUIRED
 ]);
 
 print "<pre>";
