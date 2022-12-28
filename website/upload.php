@@ -8,7 +8,6 @@ include_once 'library.inc';
 if (!login_check()) {
     header ("Location: /");
 }
-print"<hr>";print $_SESSION['user_id']; print"<hr>";
 ?>
 <div style="clear:both; margin: 5px; padding: 5px;">
 <script type="text/javascript">
