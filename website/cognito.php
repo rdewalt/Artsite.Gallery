@@ -76,28 +76,7 @@ if ( count($foo)<1 )
         $stmt->bindParam(':UserName', $C_UN);
         $stmt->execute();
     }
-    // Create user's S3 bucketry.
-    $s3Client = new S3Client([
-        'profile' => 'default',
-        'region' => 'us-west-2',
-        'version' => '2006-03-01'
-    ]);
-    $bucket= "yna-images";
-    $s3Client ->putObject(array(
-        'Bucket' => $bucket,
-        'Key'    => $folder,
-        'Body'   => "",
-        'ACL'    => 'public-read'
-       ));
-    
-    $bucket= "yna-images-resized";
-    $s3Client ->putObject(array(
-        'Bucket' => $bucket,
-        'Key'    => $folder,
-        'Body'   => "",
-        'ACL'    => 'public-read'
-       ));
-        
+ 
 
 }
 
@@ -112,6 +91,28 @@ if ( count($foo) )  {
         $_SESSION['user_id']=$u['id'];
     }
 }
+   // Create user's S3 bucketry.
+   $s3Client = new S3Client([
+    'profile' => 'default',
+    'region' => 'us-west-2',
+    'version' => '2006-03-01'
+]);
+$bucket= "yna-images";
+$s3Client ->putObject(array(
+    'Bucket' => $bucket,
+    'Key'    => $folder,
+    'Body'   => "",
+    'ACL'    => 'public-read'
+   ));
+
+$bucket= "yna-images-resized";
+$s3Client ->putObject(array(
+    'Bucket' => $bucket,
+    'Key'    => $folder,
+    'Body'   => "",
+    'ACL'    => 'public-read'
+   ));
+
 
     header ("Location: /");
 ?>
