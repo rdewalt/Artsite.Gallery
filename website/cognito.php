@@ -83,7 +83,8 @@ $_SESSION['loggedin'] = true;
 $bd=date_create($_SESSION["B"]);
 $now=date_create(date("Y-m-d"));
 $diff=date_diff($bd,$now);
-if ($diff>=18) {$_SESSION["ADULT"]="Y";} else {$_SESSION["ADULT"]="N";}
+$age=$diff->format('%y');
+if ($age>=18) {$_SESSION["ADULT"]="Y";} else {$_SESSION["ADULT"]="N";}
 
 $dbh=getDBH();
 $sql = "select * from users where cog_id = :CID";
