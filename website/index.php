@@ -19,11 +19,11 @@ if (true) {
 // Front page "Last x images" by default if not logged in
 // Otherwise show Last 50 with Blocklist/Category Filters.
    		$dbh=getDBH();
-   		$sql="select users.username as username, ImageID, Title, shard, Description, UploadDate from images,users where UserID=users.id and State='L' and NSFW='N' order by UploadDate desc limit 50";
+   		$sql="select users.username as username, ImageID, Title, shard, Filename, Description, UploadDate from images,users where UserID=users.id and State='L' and NSFW='N' order by UploadDate desc limit 50";
    		if (isset($_SESSION['NSFW'])) {
 	   		if ($_SESSION['NSFW']=='Y')
 	   		{
-	   		$sql="select users.username as username, ImageID, Title, shard, Description, UploadDate from images,users where UserID=users.id and State='L' order by UploadDate desc limit 50";
+	   		$sql="select users.username as username, ImageID, Title, shard, Filename, Description, UploadDate from images,users where UserID=users.id and State='L' order by UploadDate desc limit 50";
 	   		}
    		}
 		$sth=$dbh->prepare($sql);
@@ -40,7 +40,7 @@ if (isset($_SESSION['DisplayStyle'])){
 		foreach ($imgs as $i) {
 ?>
  <div class="frontpageimageTimeline" id="<?=$i['ImageID']?>">
-<div class="ImageBlock"><a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageTimeline" src="https://yna-images.s3.us-west-2.amazonaws.com/<?=$i['shard']?>/<?=$i['Thumbnail']?>"></a></div>
+<div class="ImageBlock"><a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageTimeline" src="https://yna-images.s3.us-west-2.amazonaws.com/<?=$i['shard']?>/<?=$i['Filename']?>"></a></div>
 <div class="ImageHeader"><span class="ArtistName"><?=$i['username']?></span> - <span class="ImageTitle"><?=$i['Title']?></span> - <span class="ImageUploadDate"><?=$i['UploadDate']?></span><br></div>
 <div class="ImageDescriptionDiv"><span class="ImageDescriptionText"><?=$i['Description']?></span></div>
  </div><hr>
@@ -52,7 +52,7 @@ else {
 		foreach ($imgs as $i) {
 ?>
  <div class="frontpageimageGrid" id="<?=$i['ImageID']?>">
-<a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageGrid" src="/A/<?=$i['shard']?>/<?=$i['Thumbnail']?>"></a>
+<a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageGrid" src="/A/<?=$i['shard']?>/<?=$i['Filename']?>"></a>
  </div>
 <?
 		}
