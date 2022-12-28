@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 use Aws\Iam\IamClient;
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
+use Aws\CognitoIdentityProvider\CognitoIdentityProviderClient;
 
 
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
@@ -127,6 +128,22 @@ $s3Client ->putObject(array(
     'Body'   => "",
     'ACL'    => 'public-read'
    ));
+
+$client = new CognitoIdentityProviderClient([
+    'profile' => 'default',
+    'region' => 'us-west-2',
+    'version' => '2016-04-18'
+]);
+
+$response = $client->getUser([
+    'AccessToken' => $access_token, // REQUIRED
+]);
+if ($DEBUG){ 
+    print "<hr>";
+    print_r ($response);
+}
+
+
 if (!$DEBUG){ 
 header ("Location: /");
 }
