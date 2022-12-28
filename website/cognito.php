@@ -91,6 +91,14 @@ if ( count($foo) )  {
         $_SESSION['user_id']=$u['id'];
     }
 }
+
+
+require 'vendor/autoload.php';
+
+use Aws\Iam\IamClient;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
    // Create user's S3 bucketry.
    $s3Client = new S3Client([
     'profile' => 'default',
