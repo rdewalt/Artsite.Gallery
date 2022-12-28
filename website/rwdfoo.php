@@ -14,7 +14,7 @@ $client = new CognitoIdentityProviderClient([
 ]);
 
 $result = $client->listUserPools([
-    'MaxResults' => 100
+    'MaxResults' => 10
 ]);
 
 print "<pre>";
