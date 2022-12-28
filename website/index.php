@@ -40,7 +40,7 @@ if (isset($_SESSION['DisplayStyle'])){
 		foreach ($imgs as $i) {
 ?>
  <div class="frontpageimageTimeline" id="<?=$i['ImageID']?>">
-<div class="ImageBlock"><a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageTimeline" src="/A/<?=$i['shard']?>/<?=$i['Thumbnail']?>"></a></div>
+<div class="ImageBlock"><a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageTimeline" src="https://yna-images.s3.us-west-2.amazonaws.com/<?=$i['shard']?>/<?=$i['Thumbnail']?>"></a></div>
 <div class="ImageHeader"><span class="ArtistName"><?=$i['username']?></span> - <span class="ImageTitle"><?=$i['Title']?></span> - <span class="ImageUploadDate"><?=$i['UploadDate']?></span><br></div>
 <div class="ImageDescriptionDiv"><span class="ImageDescriptionText"><?=$i['Description']?></span></div>
  </div><hr>

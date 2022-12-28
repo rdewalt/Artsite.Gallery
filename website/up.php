@@ -76,7 +76,7 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
 // 	$ThumbFile="$GDir/$Thumbnail";
 
 
-
+if ($SkipRecent=="Y") {$State="Y";} else {$State="L";}
 $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where ImageID=:ImageID and UserID=:UserID";
     if ($stmt = $dbh->prepare($sql)) {
         $stmt->bindParam(':ImageID', $ImageRecordID);
