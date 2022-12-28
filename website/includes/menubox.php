@@ -16,6 +16,8 @@ if ($_SERVER['SCRIPT_NAME']!='/u.php')
 	}
 }
 
+if (login_check()) {
+
 	if (isset($_SESSION['NSFW'])){
 		$NSFW=$_SESSION['NSFW'];
 	} else {
@@ -27,6 +29,8 @@ if ($_SERVER['SCRIPT_NAME']!='/u.php')
 	else {
 		?> <a href="nsfw_toggle.php?N=Yes&U=<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">(NSFW Hidden)</a>&nbsp; <?
 	}
+}
+
 if (login_check()) {
 		$userName=$_SESSION['username'];
 		$userID=$_SESSION['user_id'];
