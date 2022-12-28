@@ -9,7 +9,7 @@ use Aws\Exception\AwsException;
 $SITENAME="YNA: You Need Art";
 $SITEHTTPS="https://yna.solfire.com/";
 $SITEURL="yna.solfire.com";
-global $ICONS;
+global $ICONS; 
 $ICONS['filefolder']="<span class=\"fileFolder\">&#128194;</span>";
 $ICONS['configure']="<span class=\"setupIcon\">&#9881;</span>";
 

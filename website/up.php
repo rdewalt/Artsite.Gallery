@@ -1,12 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
-
-use Aws\Iam\IamClient;
-use Aws\S3\S3Client;
-use Aws\Exception\AwsException;
-
-include_once 'library.inc';
+require_once 'library.inc';
 login_check();
 
 if (isset($_POST['funct'])=='Submit') {
@@ -66,7 +60,7 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
     $bucket= "yna-images"; 
     $s3Client ->putObject(array(
         'Bucket' => $bucket,
-        'Key'    => $folder . $ShortImage . "." . $Ext,
+        'Key'    => $Shard . $ShortImage . "." . $Ext,
         'SourceFile'   => $TempFile,
         'ACL'    => 'public-read'
        ));
@@ -84,7 +78,6 @@ $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where
         $stmt->bindParam(':ShortID', $ShortImage);
         $stmt->bindParam(':State', $State);
         $stmt->bindParam(':Filename', $Filename);
-        $stmt->bindParam(':Thumbnail', $Thumbnail);
         $stmt->execute();
     }
 
@@ -94,7 +87,7 @@ $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where
     if ($Category==36) {
 	    	$sql="insert into UserIcon values (:UserID,:ImageID,:UserName, now() ) on DUPLICATE KEY UPDATE imageid=:ImageID";
 	    if ($stmt = $dbh->prepare($sql)) {
-	        $stmt->bindParam(':UserID', $UserID);
+	        $stmt->bindParam(':UserID', $_SESSION['user_id']);
 	        $stmt->bindParam(':ImageID', $ImageRecordID);
 	        $stmt->bindParam(':UserName', $_SESSION['username']);
     	    $stmt->execute();
