@@ -52,6 +52,7 @@ $response = json_decode(curl_exec($ch),true);
 $C_UID=$response["sub"];
 $C_UN=$response["username"];
 $C_Email=$response["email"];
+$folder= "a/". substr($C_UID,0,2) . "/" . $C_UID . "/";
 
 // Set into cookies that expire when we're told they can.
 
@@ -61,6 +62,7 @@ $_SESSION["R"]=$refresh_token;
 $_SESSION["U"]=$C_UID;
 $_SESSION["folder"]= $folder;
 $_SESSION['loggedin'] = true;
+
 
 // OKAY, here we do the new user check and setup.
 $dbh=getDBH();
@@ -79,7 +81,6 @@ if ( count($foo)<1 )
         $stmt->execute();
     }
     // Create user's S3 bucketry.
-    $folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
     $s3Client = new S3Client([
         'profile' => 'default',
         'region' => 'us-west-2',
