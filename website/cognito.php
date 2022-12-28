@@ -1,4 +1,4 @@
-<pre><?php
+<?php
 require "library.inc";
 require 'vendor/autoload.php';
 
@@ -27,8 +27,6 @@ curl_setopt_array($ch, [
 ]);
 $response = json_decode(curl_exec($ch),true);
 
-print_r($response);
-
 // Convert to variables I can use.
 $id_token=$response["id_token"];
 $access_token=$response["access_token"];
@@ -51,8 +49,6 @@ curl_setopt_array($ch, [
 ]);
 
 $response = json_decode(curl_exec($ch),true);
-
-print_r($response);
 
 $C_UID=$response["sub"];
 $C_UN=$response["username"];
@@ -95,7 +91,6 @@ if ( count($foo) )  {
     }
 }
 
-
    // Create user's S3 bucketry.
 $s3Client = new S3Client([
     'profile' => 'default',
@@ -118,6 +113,5 @@ $s3Client ->putObject(array(
     'ACL'    => 'public-read'
    ));
 
-
-    header ("Location: /");
+header ("Location: /");
 ?>
