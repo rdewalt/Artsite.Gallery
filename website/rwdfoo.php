@@ -1,4 +1,6 @@
 <?php
+require_once "library.inc";
+
 $my_uid="50543915-1090-41e1-95cc-b55d3cf0b4b2";
 $user_pool_id="us-west-2_tfaLXU1i7";
 
