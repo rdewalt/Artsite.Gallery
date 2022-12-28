@@ -1,4 +1,9 @@
 <?php
+
+if (login_check()) {
+    header ("Location: /")
+}
+
         $tags = str_replace("|",", ",'b|i|u|size|color|center|quote|url');
 
 require_once 'header.inc';
@@ -21,10 +26,12 @@ if ($_GET['e']=="BadThing") { print "<h1>Upload Failed, Check Things, Try Again.
 }
 ?>
 <h2>Image Upload: Text to go below later...</h2>
-<p class="upboxspan">Currently Acceptable formats: (images) <b>GIF/JPG/PNG</b>
-<br><br><b>Formats coming soon:</b> (prose) TXT/RTF  (audio) MP3/OGG.  Maybe more formats later.
+<p class="upboxspan">Currently Acceptable formats: <b>GIF/JPG/PNG</b>
+<br>Maybe more formats later if people want me to support them.
 
-<br><br>
+<br><br>There is no <b>"Adult"</b> set of categories.  Do mark anything Adult, or even questionably NSFW properly. 
+
+<br>
 <form name="theForm" action="up.php" method="post" onSubmit="return DoForm();" enctype="multipart/form-data">
 <style>
 td { background-color: #ddddff; }
@@ -38,10 +45,6 @@ select { background-color: #ffffff; }
 <input type=hidden name="MAX_FILE_SIZE" value="<?=1024*1024*5?>">
 <input type=hidden name="funct" value="Submit">
 <input type="file" name="Image">
-</td></tr>
-<tr><td align=right valign=top><span class="upboxspan">Custom Thumbnail:</span></td>
-<td align=left valign=top colspan="4">
-<input type="file" name="Thumbnail"> (Optional)
 </td></tr>
 <tr><td align=right><span class="upboxspan">Image Category:</span></td><td><select name="category" id="artCategory">
 <?
@@ -82,8 +85,9 @@ select { background-color: #ffffff; }
 
 <tr><td align=right><span class="upboxspan">Description:</span></td><td colspan="3" valign="top"><textarea name="desc" cols="100" rows="10" wrap="hard"></textarea></td>
 </tr>
-<tr><td align=right><span class="upboxspan">Is This NSFW:</span></td><td colspan="3"><input type="Radio" name="Adult" value="N" CHECKED>No  <input type="Radio" name="Adult" value="Y">Yes</td>
-</tr><tr><td align=right><span class="upboxspan">Skip Recent Uploads:</span></td><td colspan="3"><input type="Checkbox" name="skip" value="Y"> Image will NOT show on the front page when checked.</td></tr>
+<tr><td align=right><span class="upboxspan">Is This NSFW:</span></td><td colspan="3"><input type="Radio" name="Adult" value="N">No  <input type="Radio" name="Adult" value="Y" CHECKED>Yes</td>
+I default to marking EVERY image as "NSFW" so there is no ACCIDENTAL "I forgot to check..." and keeps the site safer.
+</tr><tr><td align=right><span class="upboxspan"><b>Skip Recent Uploads:</b></span></td><td colspan="3"><input type="Checkbox" name="skip" value="Y"> Image will NOT show on the front page when checked.</td></tr>
 <tr><td valign=top align=center colspan="4">
 <input type=submit value="Upload File" name="MyButton"></td></tr>
 </table>
@@ -96,7 +100,6 @@ to show up on the main front page.
 <br><br><B>"Custom Thumbnail"</B> Attach a thumbnail that is at most 150x150px.  If you do not, the site will automatically generate a thumbnail for your submission.
 <br><br><b>"Keywords"</b> As many as you deem necessary, within limits,  COMMA DELIMTIED please
 <br><br><B>"Image Folder"</B> Placeholder for now until I get that part done, but basically allows you to organize your uploads into folders.
-<br><br>There is no <b>"Adult"</b> set of categories.  Do mark anything Adult, or even questionably NSFW properly.
 
 <?php
 require_once 'footer.inc';
