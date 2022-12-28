@@ -6,7 +6,7 @@
 function GetComments($WhichID,$WhichType = 'I',$Limit = 0)
 {
     $dbh=getDBH();
-	$sql="select comments.*, users.username, users.email, shard,images.Medium from comments join users on comments.WhoSaid = users.id left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where comments.WhichID=:ImageID and WhichType=:ImageType";
+	$sql="select comments.*, users.username, users.email, shard from comments join users on comments.WhoSaid = users.id left outer join UserIcon on users.id=UserIcon.UserID left outer join images on UserIcon.imageid=images.ImageID where comments.WhichID=:ImageID and WhichType=:ImageType";
 	if ($Limit > 0) {
 		$sql .=" limit $Limit";
 	}
