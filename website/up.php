@@ -51,7 +51,12 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
     $Filename=$OriginalFilename;
     $TempFile=$_FILES['Image']['tmp_name'];
 
+	require 'vendor/autoload.php';
 
+	use Aws\Iam\IamClient;
+	use Aws\S3\S3Client;
+	use Aws\Exception\AwsException;
+	
 	$s3Client = new S3Client([
         'profile' => 'default',
         'region' => 'us-west-2',
