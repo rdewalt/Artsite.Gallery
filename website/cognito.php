@@ -7,6 +7,7 @@ $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
 $redirect_uri = "https://yna.solfire.com/cognito.php";
 $client_secret = "mcj69iot33q3i2km2cv17ip4mbbsomksnu7s4aa2slt06jgjcp6";
 $ch = curl_init();
+
 $code = $_GET['code'];
 
 curl_setopt_array($ch, [
@@ -24,6 +25,7 @@ curl_setopt_array($ch, [
         "Authorization: Basic " . base64_encode("$client_id:$client_secret")
     ]
 ]);
+$response = json_decode(curl_exec($ch),true);
 
 // Convert to variables I can use.
 $id_token=$response["id_token"];
