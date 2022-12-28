@@ -12,16 +12,18 @@ require_once 'header.inc';
 <div class="frontpageimages">
 <?php
 
-if (true) {  // Eventually this will be the 'my feed' / Recent / Recommend list.
+if (true) {  
+	
+// Eventually this will be the 'my feed' / Recent / Recommend list.
 
 // Front page "Last x images" by default if not logged in
 // Otherwise show Last 50 with Blocklist/Category Filters.
    		$dbh=getDBH();
-   		$sql="select users.username as username, ImageID, Title, shard, Thumbnail, Description, UploadDate from images,users where UserID=users.id and State='L' and NSFW='N' order by UploadDate desc limit 50";
+   		$sql="select users.username as username, ImageID, Title, shard, Description, UploadDate from images,users where UserID=users.id and State='L' and NSFW='N' order by UploadDate desc limit 50";
    		if (isset($_SESSION['NSFW'])) {
 	   		if ($_SESSION['NSFW']=='Y')
 	   		{
-	   		$sql="select users.username as username, ImageID, Title, shard, Thumbnail, Description, UploadDate from images,users where UserID=users.id and State='L' order by UploadDate desc limit 50";
+	   		$sql="select users.username as username, ImageID, Title, shard, Description, UploadDate from images,users where UserID=users.id and State='L' order by UploadDate desc limit 50";
 	   		}
    		}
 		$sth=$dbh->prepare($sql);
