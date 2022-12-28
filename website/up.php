@@ -15,8 +15,6 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
 		exit();
 }
 
-if ($_FILES['Thumbnail']['error']==0) { $ThumbnailYes=true; } else 	{ $ThumbnailYes = false;}
-
     $Title = filter_input(INPUT_POST, 'ImageTitle', FILTER_SANITIZE_STRING);
     $Keywords = filter_input(INPUT_POST, 'ImageKeywords', FILTER_SANITIZE_STRING);
     $Description = filter_input(INPUT_POST, 'desc', FILTER_SANITIZE_STRING);
