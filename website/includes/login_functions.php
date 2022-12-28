@@ -70,7 +70,7 @@ function checkbrute($user_id) {
 
 
 function login_check() {
-    if (isset($_SESSION["I"],$_SESSION["A"],$_SESSION["R"],$_SESSION["U"],$_COOKIE["U"]))
+    if (isset($_SESSION["I"],$_SESSION["A"],$_SESSION["R"],$_SESSION["U"]))
     {
         $_SESSION['loggedin']=true;
         return true;
