@@ -56,7 +56,7 @@ global $PUID;
 			}
 			</style>
 			<div class="userpageimage">
-			<a href="i.php?id=<?=$f['ImageID']?>"><img class="frontpageimage" src="/A/<?=$f['shard']?>/<?=$f['Thumbnail']?>"></a>
+			<a href="i.php?id=<?=$f['ImageID']?>"><img class="frontpageimage" src="https://cdn2.yna.solfire.com/<?=$i['shard']?><?=$i['Filename']?>"></a>
 			</div>
 		<?
 		}
