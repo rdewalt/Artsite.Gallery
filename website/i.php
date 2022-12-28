@@ -38,21 +38,6 @@ if (isset( $_SESSION['loggedin'] ) ) {
 }
 ?>
 <script>
-image=1;
-
-function SwapImage()
-{
-	if (image==1)
-	{
-		document.getElementById('MainImage').src="<?=$img->FullImage?>";
-		image=0;
-	}
-	else
-	{
-		document.getElementById('MainImage').src="<?=$img->Image?>";
-		image=1;
-	}
-}
 
 <?php if (isset( $_SESSION['loggedin'] ) && $IFavedThis==false ) {?>
 function faveImage()
@@ -89,7 +74,7 @@ function RepComment($ID)
 </div>
 <div class="imageitself">
 <center><!-- fuck you CSS.  Be that way and I'm using a center tag. -->
-<img src="<?=$img->Image?>" id="MainImage" onClick="SwapImage();" alt="<?=$img->Title?> by <?=$img->Artist?> (Click To Toggle Size)"><br>
+<img src="<?=$img->Image?>" id="MainImage" alt="<?=$img->Title?> by <?=$img->Artist?>"><br>
 <?php if (isset( $_SESSION['loggedin'] ) && $IFavedThis==false ) {
 ?> <span id="faveImage"?>
 <a onClick="faveImage();">Favorite Image</a> | 
@@ -136,13 +121,7 @@ Image Comments:<?if (isset( $_SESSION['loggedin'] ) ) {?> - <a href="#CommentBox
 $foo=GetComments($PUID);
 foreach($foo as $f)
 {
-		if (is_null($f['shard'])) {
 		$avatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $f['email'] ) ) ) . "?d=mm&s=100";
-		}
-		else
-		{
-			$avatar="/A/".$f['shard']."/".$f['Medium'];
-		}
 
 ?><a name="CID<?=$f['CommentID']?>"></a>
 <a href="u.php?id=<?=$f['WhoSaid']?>"><img style="align:left; float:left; padding: 0px;" src="<?=$avatar?>" alt="<?=$f['username']?>""></a>
