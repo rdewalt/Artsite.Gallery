@@ -54,17 +54,13 @@ $C_UN=$response["username"];
 $C_Email=$response["email"];
 $folder= "a/". substr($C_UID,0,2) . "/" . $C_UID . "/";
 
-// Set into cookies that expire when we're told they can.
-
 $_SESSION["I"]=$id_token;
 $_SESSION["A"]=$access_token;
 $_SESSION["R"]=$refresh_token;
 $_SESSION["U"]=$C_UID;
-$_SESSION["folder"]= $folder;
+$_SESSION["folder"]= $folder; 
 $_SESSION['loggedin'] = true;
 
-
-// OKAY, here we do the new user check and setup.
 $dbh=getDBH();
 $sql = "select * from users where cog_id = :CID";
 $sth = $dbh->prepare($sql);
@@ -117,8 +113,5 @@ if ( count($foo) )  {
     }
 }
 
-    setcookie("U",$C_UID, time()+$expires_in,"/","yna.solfire.com",1,1);
-
     header ("Location: /");
-
 ?>
