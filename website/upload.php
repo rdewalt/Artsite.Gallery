@@ -1,7 +1,7 @@
 <?php
 
 if (login_check()) {
-    header ("Location: /")
+    header ("Location: /");
 }
 
         $tags = str_replace("|",", ",'b|i|u|size|color|center|quote|url');
