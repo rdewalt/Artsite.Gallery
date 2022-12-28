@@ -9,7 +9,8 @@ use Aws\CognitoIdentityProvider\CognitoIdentityProviderClient;
 
 $client = new CognitoIdentityProviderClient([
     'profile' => 'default',
-    'region' => 'us-west-2'
+    'region' => 'us-west-2',
+    'version' => '2016-04-18'
 ]);
 
 $result = $client->listUserPools([
