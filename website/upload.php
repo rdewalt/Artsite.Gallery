@@ -1,13 +1,11 @@
 <?php
 
-
-        $tags = str_replace("|",", ",'b|i|u|size|color|center|quote|url');
+$tags = str_replace("|",", ",'b|i|u|size|color|center|quote|url');
 
 require_once 'header.inc';
 include_once 'library.inc';
 
-
-if (login_check()) {
+if (!login_check()) {
     header ("Location: /");
 }
 
