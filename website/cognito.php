@@ -17,7 +17,6 @@ curl_setopt_array($ch, [
         'code'          => $code,
         'redirect_uri'  => $redirect_uri
     ]),
-    CURLOPT_POSTFIELDS => $params,
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
@@ -39,7 +38,6 @@ curl_setopt_array($ch, [
         'code'          => $code,
         'redirect_uri'  => $redirect_uri
       ]),
-    CURLOPT_POSTFIELDS => $params,
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
