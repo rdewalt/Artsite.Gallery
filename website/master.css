@@ -13,14 +13,14 @@ a:active	{ background-color: #ffffff; color: #d2d2d2; text-decoration: none; }
 
 .headerlogo {
 	background-color: #4040af;
-	width: 141px; height: 36px; /* 16:9 ratio.... */
+	/* width: 141px; height: 36px; /* 16:9 ratio.... */
 	font-size: 25px;
 	color: #ffffff;
 	top: 0; left: 0;
 	float: left;
 }
 .success {
-	font-size: 200%;
+	font-size: 400%;
 	color: orange;
 }
 
