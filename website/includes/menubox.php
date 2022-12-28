@@ -1,7 +1,7 @@
 <?php
 //Placeholder Bits
 print "<!-- ".$_SERVER['SCRIPT_NAME'] . " -->";
-if ($_SERVER['SCRIPT_NAME']!='/index.php')
+if ($_SERVER['SCRIPT_NAME']=='/index.php')
 {
 	if (isset($_SESSION['DisplayStyle'])){
 			$DisplayStyle=$_SESSION['DisplayStyle'];
