@@ -25,7 +25,7 @@ print "<pre>";
 print_r($_SESSION);
 print  "<hr>";
 $bd=date_create($_SESSION["B"]);
-$now=date_create(getdate());
+$now=date_create(gmdate(DATE_ATOM));
 $diff=date_diff($bd,$now);
 print "-- $diff";
 /*
