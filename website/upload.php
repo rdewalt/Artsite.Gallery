@@ -1,13 +1,16 @@
 <?php
 
-if (login_check()) {
-    header ("Location: /");
-}
 
         $tags = str_replace("|",", ",'b|i|u|size|color|center|quote|url');
 
 require_once 'header.inc';
 include_once 'library.inc';
+
+
+if (login_check()) {
+    header ("Location: /");
+}
+
 ?>
 <div style="clear:both; margin: 5px; padding: 5px;">
 <script type="text/javascript">
