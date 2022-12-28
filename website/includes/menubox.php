@@ -1,6 +1,6 @@
 <?php
 //Placeholder Bits
-
+print "<!-- ".$_SERVER['SCRIPT_NAME'] . " -->";
 if ($_SERVER['SCRIPT_NAME']!='/u.php')
 {
 	if (isset($_SESSION['DisplayStyle'])){
