@@ -20,7 +20,7 @@ if (isset($_GET['id']))
 if ($img->data==false) { header("Location: /");}
 
 // If this image is NSFW and you are not [Logged in, Adult Age, Active NSFW]
-if ($img->NSFW=="Y" && !(isset($_SESSION['NSFW'])) ) { header("Location: /nsfwblock.php");}
+if ($img->NSFW=="Y" && !isset($_SESSION['NSFW'])) { header("Location: /nsfwblock.php");}
 
 $img->AddView();
 
@@ -163,4 +163,9 @@ function GoForm()
 <div class="clearbox"></div>
 <?php
 require_once 'footer.inc';
+
+print "<pre>";
+print_r($_SESSION)
+print "<hr>";
+print_r($img);
 ?>
