@@ -162,10 +162,14 @@ function GoForm()
 </div>
 <div class="clearbox"></div>
 <?php
-require_once 'footer.inc';
+
 
 print "<pre>";
 print_r($_SESSION);
 print "<hr>";
 print_r($img);
+
+
+require_once 'footer.inc';
+
 ?>
