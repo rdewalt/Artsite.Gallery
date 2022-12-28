@@ -6,10 +6,7 @@ $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
 $redirect_uri = "https://yna.solfire.com/cognito.php";
 $client_secret = "mcj69iot33q3i2km2cv17ip4mbbsomksnu7s4aa2slt06jgjcp6";
-
 $ch = curl_init();
-
-// Get the token
 $code = $_GET['code'];
 
 curl_setopt_array($ch, [
@@ -28,7 +25,6 @@ curl_setopt_array($ch, [
         "Authorization: Basic " . base64_encode("$client_id:$client_secret")
     ]
 ]);
-$response = json_decode(curl_exec($ch),true);
 
 // Convert to variables I can use.
 $id_token=$response["id_token"];
@@ -73,10 +69,8 @@ $sth = $dbh->prepare($sql);
 $sth->bindParam(':CID',$C_UID);
 $sth->execute();
 $foo=$sth->fetchAll();
-if ( count($foo)<1 )  {
-
-    // User not found! yay!
-
+if ( count($foo)<1 )
+    {
     $sql="insert into users values (NULL,:UserName,:Email,'U',:UserID, now() )";
     if ($stmt = $dbh->prepare($sql)) {
         $stmt->bindParam(':UserID', $C_UID);
@@ -84,7 +78,6 @@ if ( count($foo)<1 )  {
         $stmt->bindParam(':UserName', $C_UN);
         $stmt->execute();
     }
-
     // Create user's S3 bucketry.
     $folder= "a/". left($C_UID,2) . "/" . $C_UID . "/";
     $s3Client = new S3Client([
@@ -92,9 +85,7 @@ if ( count($foo)<1 )  {
         'region' => 'us-west-2',
         'version' => '2006-03-01'
     ]);
-    
     $bucket= "yna-images";
-
     $s3Client ->putObject(array(
         'Bucket' => $bucket,
         'Key'    => $folder,
