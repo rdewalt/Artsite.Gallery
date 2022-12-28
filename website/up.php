@@ -74,7 +74,7 @@ if (!($Ext=="png" or $Ext=="gif" or $Ext=="jpg" or $Ext=="jpeg")) {
 
 //	copy ("$TempFile","$GDir/$Filename");
 // 	$ThumbFile="$GDir/$Thumbnail";
-
+$Filename= $ShortImage . "." . $Ext;
 if (isset($_POST['skip'])) {$State="Y";} else {$State="L";}
 $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where ImageID=:ImageID and UserID=:UserID";
     if ($stmt = $dbh->prepare($sql)) {
@@ -82,7 +82,7 @@ $sql="update images set ShortID=:ShortID, Filename=:Filename, State=:State where
         $stmt->bindParam(':UserID', $UserID);
         $stmt->bindParam(':ShortID', $ShortImage);
         $stmt->bindParam(':State', $State);
-        $stmt->bindParam(':Filename', $ShortImage . "." . $Ext);
+        $stmt->bindParam(':Filename', $Filename);
         $stmt->execute();
     }
 
