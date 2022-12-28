@@ -2,6 +2,11 @@
 require "library.inc";
 require 'vendor/autoload.php';
 
+use Aws\Iam\IamClient;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
+
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
 $redirect_uri = "https://yna.solfire.com/cognito.php";
