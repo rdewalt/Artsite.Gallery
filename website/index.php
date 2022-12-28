@@ -52,7 +52,7 @@ else {
 		foreach ($imgs as $i) {
 ?>
  <div class="frontpageimageGrid" id="<?=$i['ImageID']?>">
-<a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageGrid" src="/A/<?=$i['shard']?>/<?=$i['Filename']?>"></a>
+<a href="i.php?id=<?=$i['ImageID']?>"><img class="frontpageimageGrid" src="https://cdn2.yna.solfire.com/<?=$i['shard']?>/<?=$i['Filename']?>"></a>
  </div>
 <?
 		}
