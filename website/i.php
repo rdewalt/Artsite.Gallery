@@ -165,7 +165,7 @@ function GoForm()
 require_once 'footer.inc';
 
 print "<pre>";
-print_r($_SESSION)
+print_r($_SESSION);
 print "<hr>";
 print_r($img);
 ?>
