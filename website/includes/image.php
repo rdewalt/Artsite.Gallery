@@ -58,6 +58,7 @@ class image
 		$this->Description=bb_parse($this->data['Description']);
 		$this->Title=$this->data['Title'];
 		$this->Keywords=$this->data['Keywords'];
+		$this->NSFW=$this->data['NSFW'];
 		$this->Views=$this->data['ViewCount'];
 		$this->Faves=$this->data['FaveCount'];
 		$this->UploadDate=$this->data['UploadDate'];

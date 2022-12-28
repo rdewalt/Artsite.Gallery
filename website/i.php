@@ -18,6 +18,10 @@ if (isset($_GET['id']))
 	}
 	else { header("Location: /");}
 if ($img->data==false) { header("Location: /");}
+
+// If this image is NSFW and you are not [Logged in, Adult Age, Active NSFW]
+if ($img->NSFW=="Y" && !(login_check() && $_SESSION["ADULT"]=="Y" && isset($_SESSION['NSFW'])) ) { header("Location: /nsfwblock.php");}
+
 $img->AddView();
 
 if (isset( $_SESSION['loggedin'] ) ) {
