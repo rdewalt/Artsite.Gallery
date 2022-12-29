@@ -217,7 +217,7 @@ div.imageboxTitle {
 div.imagedetails
 {
 	float: right;
-	border-style 1px solid;
+	border-style: 1px solid;
 	border-color: #000000;
 	background-color: #eeeeff;
 }
