@@ -69,7 +69,8 @@ if ($DEBUG){
 $C_UID=$response["sub"];
 $C_UN=$response["username"];
 $C_Email=$response["email"];
-$C_Birthdate=$response["birthdate"];
+$C_Birthdate=str_replace("-","/",str_replace(".","/",$response["birthdate"]));
+
 $narf=explode("/",$C_Birthdate);
 if ($narf[0] >12) //The Bowen Flip.
 {$C_Birthdate=$narf[1]."/".$narf[0]."/".$narf[2];}
