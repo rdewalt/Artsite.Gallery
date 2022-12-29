@@ -70,6 +70,10 @@ $C_UID=$response["sub"];
 $C_UN=$response["username"];
 $C_Email=$response["email"];
 $C_Birthdate=$response["birthdate"];
+$narf=explode("/",$C_Birthdate);
+if ($narf[0] >12) //The Bowen Flip.
+{$C_Birthdate=$narf[1]."/".$narf[0]."/".$narf[2];}
+
 $folder= "a/". substr($C_UID,0,2) . "/" . $C_UID . "/";
 
 $_SESSION["I"]=$id_token;
