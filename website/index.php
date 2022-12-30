@@ -35,7 +35,7 @@ if (isset($_SESSION['DisplayStyle'])){
 		$DisplayStyle=$_SESSION['DisplayStyle'];
 	} else {$DisplayStyle="I";}
 
-// Twitter Style
+// Threaded Style
 	if ($DisplayStyle=="T") {
 		foreach ($imgs as $i) {
 ?>
@@ -47,7 +47,7 @@ if (isset($_SESSION['DisplayStyle'])){
 <?
 		}
 }
-// Instagram Style
+// Grid Style
 else {
 		foreach ($imgs as $i) {
 ?>
