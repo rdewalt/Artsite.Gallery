@@ -106,7 +106,7 @@ In Favorites! <a onClick="UnFave();" onMouseOver="this.innerHTML='(Remove)';" on
 <a href="/u.php?id=<?=$img->ArtistID?>"><img src="<?=$img->ArtistAvatar?>" alt="<?=$img->Artist?>"></a>
 <hr>
 <ul>Details:<br>
-<li>W x H: <?=$img->Dimensions?></li>
+<li><?=$img->Dimensions?></li>
 <li>Views: <?=$img->Views?></li>
 <li>Faves: <?=$img->Faves?></li>
 <li><span onMouseOver="this.innerHTML='Keywords: <br><?=preg_replace("/, /",',<br>',preg_replace("/[^A-Za-z0-9, ]/", '', $img->Keywords));?>';">Keywords: (*)</span></li>
@@ -126,9 +126,9 @@ foreach($foo as $f)
 		$avatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $f['email'] ) ) ) . "?d=mm&s=100";
 
 ?><a name="CID<?=$f['CommentID']?>"></a>
-<a href="u.php?id=<?=$f['WhoSaid']?>"><img style="align:left; float:left; padding: 0px;" src="<?=$avatar?>" alt="<?=$f['username']?>""></a>
+<a href="u.php?id=<?=$f['WhoSaid']?>"><img style="align:left; float:left; padding: 5px;" src="<?=$avatar?>" alt="<?=$f['username']?>""></a>
 &nbsp;<?=$f['username']?> - <?=$f['WhenSaid']?> | CID:<?=$f['CommentID']?><?if (isset( $_SESSION['loggedin'] ) ) {?><span onClick="RepComment(<?=$f['CommentID']?>);">(Reply)</span><?}?><hr>
-<span style="padding: 10px;"><?=bb_parse($f['WhatSaid'])?></span>
+<span style="padding: 0px 0px 0px 10px;"><?=bb_parse($f['WhatSaid'])?></span>
 <br clear="all"><br><hr>
 <?
 }
