@@ -12,6 +12,7 @@ use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 use Aws\CognitoIdentityProvider\CognitoIdentityProviderClient;
 
+session_regenerate_id(1);
 
 $cognito_domain = "https://yna-signup.auth.us-west-2.amazoncognito.com";
 $client_id = "5h9g4gpmipec6gmaiqmk0dcso6";
@@ -89,7 +90,10 @@ $bd=date_create($_SESSION["B"]);
 $now=date_create(date("Y-m-d"));
 $diff=date_diff($bd,$now);
 $age=$diff->format('%y');
-if ($age>=18) {$_SESSION["ADULT"]="Y";} else {$_SESSION["ADULT"]="N";}
+if ($age>=18) 
+    {$_SESSION["ADULT"]="Y";}
+  else
+    {$_SESSION["ADULT"]="N";}
 
 $dbh=getDBH();
 $sql = "select * from users where cog_id = :CID";
