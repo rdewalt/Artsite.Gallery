@@ -81,7 +81,12 @@ resource "aws_iam_role" "thumbnail_lambda_role" {
       Version = "2012-10-17"
       Statement = [
         {
-          Action   = ["s3:*"]
+          Action = ["s3:*", "ec2:DescribeNetworkInterfaces",
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeInstances",
+            "ec2:AttachNetworkInterface"
+          ]
           Effect   = "Allow"
           Resource = "*"
         },

@@ -30,6 +30,7 @@ resource "ssh_resource" "db_init" {
   commands = [
     "sudo hostnamectl set-hostname database-0",
     "echo '127.0.0.1 database-0' | sudo tee -a /etc/hosts",
+    "echo '127.0.0.1 mysql' | sudo tee -a /etc/hosts",
     "sudo apt-get update",
     "sudo apt-get install git -y",
     "ssh-keyscan github.com >> ~/.ssh/known_hosts",

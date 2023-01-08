@@ -17,10 +17,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id                = local.s3_origin_id
   }
 
+  aliases = ["cdn1.yna.solfire.com"]
+
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
@@ -81,6 +82,7 @@ resource "aws_cloudfront_distribution" "s3_thumbs_distribution" {
     origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.s3_origin_id
   }
+  aliases             = ["cdn2.yna.solfire.com"]
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
